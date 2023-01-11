@@ -1,0 +1,683 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E0B020F296EED4600697C19 /* TaskViewDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B020E296EED4500697C19 /* TaskViewDetailsViewController.swift */; };
+		5E0B0211296EED7100697C19 /* AttendanceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B0210296EED7100697C19 /* AttendanceDetailsViewController.swift */; };
+		5E1E87EE296310F3006D3DB6 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1E87ED296310F3006D3DB6 /* ContainerViewController.swift */; };
+		5E1E87FE296379FF006D3DB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1E87FD296379FF006D3DB6 /* ProfileViewController.swift */; };
+		5E3FAA14294D1ED300260EA9 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FAA13294D1ED300260EA9 /* Helper.swift */; };
+		5E4D20BA2955BF1B00989062 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D20B92955BF1B00989062 /* UserViewModel.swift */; };
+		5E4D20BC2955BF2D00989062 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D20BB2955BF2D00989062 /* UserModel.swift */; };
+		5EED9E6B295C4D6800FCBFB3 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED9E6A295C4D6800FCBFB3 /* EditTaskViewController.swift */; };
+		5EED9E73295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED9E71295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift */; };
+		5EED9E74295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EED9E72295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib */; };
+		5EF34F0B294A326200CEC902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F0A294A326200CEC902 /* AppDelegate.swift */; };
+		5EF34F0D294A326200CEC902 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F0C294A326200CEC902 /* ViewController.swift */; };
+		5EF34F10294A326200CEC902 /* TrackerForMakeathon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F0E294A326200CEC902 /* TrackerForMakeathon.xcdatamodeld */; };
+		5EF34F12294A326400CEC902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF34F11294A326400CEC902 /* Assets.xcassets */; };
+		5EF34F15294A326400CEC902 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF34F13294A326400CEC902 /* Main.storyboard */; };
+		5EF34F20294A326500CEC902 /* TrackerForMakeathonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F1F294A326500CEC902 /* TrackerForMakeathonTests.swift */; };
+		5EF34F2A294A326500CEC902 /* TrackerForMakeathonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F29294A326500CEC902 /* TrackerForMakeathonUITests.swift */; };
+		5EF34F2C294A326500CEC902 /* TrackerForMakeathonUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F2B294A326500CEC902 /* TrackerForMakeathonUITestsLaunchTests.swift */; };
+		5EF34F3C294A355E00CEC902 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF34F3B294A355E00CEC902 /* DashboardViewController.swift */; };
+		5EFA9E1C296F054200A48D45 /* StatusReportNSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA9E1B296F054200A48D45 /* StatusReportNSTableCell.swift */; };
+		5EFA9E1E296F056400A48D45 /* TimeIntervalNSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA9E1D296F056400A48D45 /* TimeIntervalNSTableCell.swift */; };
+		5EFA9E20296F057500A48D45 /* EditProfileNSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA9E1F296F057500A48D45 /* EditProfileNSTableCell.swift */; };
+		5EFA9E22296F057E00A48D45 /* HolidayNSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA9E21296F057E00A48D45 /* HolidayNSTableCell.swift */; };
+		5EFA9E24296F058800A48D45 /* MeetingNSTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA9E23296F058800A48D45 /* MeetingNSTableCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5EF34F1C294A326500CEC902 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EF34EFF294A326200CEC902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5EF34F06294A326200CEC902;
+			remoteInfo = TrackerForMakeathon;
+		};
+		5EF34F26294A326500CEC902 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5EF34EFF294A326200CEC902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5EF34F06294A326200CEC902;
+			remoteInfo = TrackerForMakeathon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5E0B020E296EED4500697C19 /* TaskViewDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewDetailsViewController.swift; sourceTree = "<group>"; };
+		5E0B0210296EED7100697C19 /* AttendanceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceDetailsViewController.swift; sourceTree = "<group>"; };
+		5E1E87ED296310F3006D3DB6 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		5E1E87FD296379FF006D3DB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5E3FAA13294D1ED300260EA9 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		5E4D20B92955BF1B00989062 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		5E4D20BB2955BF2D00989062 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		5EED9E6A295C4D6800FCBFB3 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
+		5EED9E71295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskDetailCollectionViewItem.swift; sourceTree = "<group>"; };
+		5EED9E72295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTaskDetailCollectionViewItem.xib; sourceTree = "<group>"; };
+		5EF34F07294A326200CEC902 /* TrackerForMakeathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerForMakeathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF34F0A294A326200CEC902 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5EF34F0C294A326200CEC902 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5EF34F0F294A326200CEC902 /* TrackerForMakeathon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrackerForMakeathon.xcdatamodel; sourceTree = "<group>"; };
+		5EF34F11294A326400CEC902 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5EF34F14294A326400CEC902 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5EF34F16294A326400CEC902 /* TrackerForMakeathon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TrackerForMakeathon.entitlements; sourceTree = "<group>"; };
+		5EF34F1B294A326500CEC902 /* TrackerForMakeathonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerForMakeathonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF34F1F294A326500CEC902 /* TrackerForMakeathonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerForMakeathonTests.swift; sourceTree = "<group>"; };
+		5EF34F25294A326500CEC902 /* TrackerForMakeathonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerForMakeathonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF34F29294A326500CEC902 /* TrackerForMakeathonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerForMakeathonUITests.swift; sourceTree = "<group>"; };
+		5EF34F2B294A326500CEC902 /* TrackerForMakeathonUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerForMakeathonUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5EF34F3B294A355E00CEC902 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		5EFA9E1B296F054200A48D45 /* StatusReportNSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusReportNSTableCell.swift; sourceTree = "<group>"; };
+		5EFA9E1D296F056400A48D45 /* TimeIntervalNSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeIntervalNSTableCell.swift; sourceTree = "<group>"; };
+		5EFA9E1F296F057500A48D45 /* EditProfileNSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileNSTableCell.swift; sourceTree = "<group>"; };
+		5EFA9E21296F057E00A48D45 /* HolidayNSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HolidayNSTableCell.swift; sourceTree = "<group>"; };
+		5EFA9E23296F058800A48D45 /* MeetingNSTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingNSTableCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5EF34F04294A326200CEC902 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF34F18294A326500CEC902 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF34F22294A326500CEC902 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5EED9E6C295C561800FCBFB3 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				5EED9E71295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift */,
+				5EED9E72295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		5EF34EFE294A326200CEC902 = {
+			isa = PBXGroup;
+			children = (
+				5EF34F09294A326200CEC902 /* TrackerForMakeathon */,
+				5EF34F1E294A326500CEC902 /* TrackerForMakeathonTests */,
+				5EF34F28294A326500CEC902 /* TrackerForMakeathonUITests */,
+				5EF34F08294A326200CEC902 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5EF34F08294A326200CEC902 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5EF34F07294A326200CEC902 /* TrackerForMakeathon.app */,
+				5EF34F1B294A326500CEC902 /* TrackerForMakeathonTests.xctest */,
+				5EF34F25294A326500CEC902 /* TrackerForMakeathonUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5EF34F09294A326200CEC902 /* TrackerForMakeathon */ = {
+			isa = PBXGroup;
+			children = (
+				5EF34F0A294A326200CEC902 /* AppDelegate.swift */,
+				5E3FAA13294D1ED300260EA9 /* Helper.swift */,
+				5E4D20BB2955BF2D00989062 /* UserModel.swift */,
+				5E4D20B92955BF1B00989062 /* UserViewModel.swift */,
+				5EFA9E1A296F04AB00A48D45 /* TableViewCell */,
+				5EF34F3A294A342900CEC902 /* ViewController */,
+				5EED9E6C295C561800FCBFB3 /* CollectionView */,
+				5EF34F11294A326400CEC902 /* Assets.xcassets */,
+				5EF34F13294A326400CEC902 /* Main.storyboard */,
+				5EF34F16294A326400CEC902 /* TrackerForMakeathon.entitlements */,
+				5EF34F0E294A326200CEC902 /* TrackerForMakeathon.xcdatamodeld */,
+			);
+			path = TrackerForMakeathon;
+			sourceTree = "<group>";
+		};
+		5EF34F1E294A326500CEC902 /* TrackerForMakeathonTests */ = {
+			isa = PBXGroup;
+			children = (
+				5EF34F1F294A326500CEC902 /* TrackerForMakeathonTests.swift */,
+			);
+			path = TrackerForMakeathonTests;
+			sourceTree = "<group>";
+		};
+		5EF34F28294A326500CEC902 /* TrackerForMakeathonUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5EF34F29294A326500CEC902 /* TrackerForMakeathonUITests.swift */,
+				5EF34F2B294A326500CEC902 /* TrackerForMakeathonUITestsLaunchTests.swift */,
+			);
+			path = TrackerForMakeathonUITests;
+			sourceTree = "<group>";
+		};
+		5EF34F3A294A342900CEC902 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5EF34F0C294A326200CEC902 /* ViewController.swift */,
+				5EF34F3B294A355E00CEC902 /* DashboardViewController.swift */,
+				5EED9E6A295C4D6800FCBFB3 /* EditTaskViewController.swift */,
+				5E1E87ED296310F3006D3DB6 /* ContainerViewController.swift */,
+				5E1E87FD296379FF006D3DB6 /* ProfileViewController.swift */,
+				5E0B020E296EED4500697C19 /* TaskViewDetailsViewController.swift */,
+				5E0B0210296EED7100697C19 /* AttendanceDetailsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5EFA9E1A296F04AB00A48D45 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5EFA9E1B296F054200A48D45 /* StatusReportNSTableCell.swift */,
+				5EFA9E1D296F056400A48D45 /* TimeIntervalNSTableCell.swift */,
+				5EFA9E1F296F057500A48D45 /* EditProfileNSTableCell.swift */,
+				5EFA9E21296F057E00A48D45 /* HolidayNSTableCell.swift */,
+				5EFA9E23296F058800A48D45 /* MeetingNSTableCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5EF34F06294A326200CEC902 /* TrackerForMakeathon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EF34F2F294A326500CEC902 /* Build configuration list for PBXNativeTarget "TrackerForMakeathon" */;
+			buildPhases = (
+				5EF34F03294A326200CEC902 /* Sources */,
+				5EF34F04294A326200CEC902 /* Frameworks */,
+				5EF34F05294A326200CEC902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrackerForMakeathon;
+			productName = TrackerForMakeathon;
+			productReference = 5EF34F07294A326200CEC902 /* TrackerForMakeathon.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5EF34F1A294A326500CEC902 /* TrackerForMakeathonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EF34F32294A326500CEC902 /* Build configuration list for PBXNativeTarget "TrackerForMakeathonTests" */;
+			buildPhases = (
+				5EF34F17294A326500CEC902 /* Sources */,
+				5EF34F18294A326500CEC902 /* Frameworks */,
+				5EF34F19294A326500CEC902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5EF34F1D294A326500CEC902 /* PBXTargetDependency */,
+			);
+			name = TrackerForMakeathonTests;
+			productName = TrackerForMakeathonTests;
+			productReference = 5EF34F1B294A326500CEC902 /* TrackerForMakeathonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5EF34F24294A326500CEC902 /* TrackerForMakeathonUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EF34F35294A326500CEC902 /* Build configuration list for PBXNativeTarget "TrackerForMakeathonUITests" */;
+			buildPhases = (
+				5EF34F21294A326500CEC902 /* Sources */,
+				5EF34F22294A326500CEC902 /* Frameworks */,
+				5EF34F23294A326500CEC902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5EF34F27294A326500CEC902 /* PBXTargetDependency */,
+			);
+			name = TrackerForMakeathonUITests;
+			productName = TrackerForMakeathonUITests;
+			productReference = 5EF34F25294A326500CEC902 /* TrackerForMakeathonUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5EF34EFF294A326200CEC902 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					5EF34F06294A326200CEC902 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					5EF34F1A294A326500CEC902 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 5EF34F06294A326200CEC902;
+					};
+					5EF34F24294A326500CEC902 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 5EF34F06294A326200CEC902;
+					};
+				};
+			};
+			buildConfigurationList = 5EF34F02294A326200CEC902 /* Build configuration list for PBXProject "TrackerForMakeathon" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5EF34EFE294A326200CEC902;
+			productRefGroup = 5EF34F08294A326200CEC902 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5EF34F06294A326200CEC902 /* TrackerForMakeathon */,
+				5EF34F1A294A326500CEC902 /* TrackerForMakeathonTests */,
+				5EF34F24294A326500CEC902 /* TrackerForMakeathonUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5EF34F05294A326200CEC902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF34F12294A326400CEC902 /* Assets.xcassets in Resources */,
+				5EF34F15294A326400CEC902 /* Main.storyboard in Resources */,
+				5EED9E74295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF34F19294A326500CEC902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF34F23294A326500CEC902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5EF34F03294A326200CEC902 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF34F10294A326200CEC902 /* TrackerForMakeathon.xcdatamodeld in Sources */,
+				5E4D20BA2955BF1B00989062 /* UserViewModel.swift in Sources */,
+				5EF34F0D294A326200CEC902 /* ViewController.swift in Sources */,
+				5E1E87EE296310F3006D3DB6 /* ContainerViewController.swift in Sources */,
+				5E1E87FE296379FF006D3DB6 /* ProfileViewController.swift in Sources */,
+				5EED9E73295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift in Sources */,
+				5EFA9E1E296F056400A48D45 /* TimeIntervalNSTableCell.swift in Sources */,
+				5EFA9E20296F057500A48D45 /* EditProfileNSTableCell.swift in Sources */,
+				5E3FAA14294D1ED300260EA9 /* Helper.swift in Sources */,
+				5EED9E6B295C4D6800FCBFB3 /* EditTaskViewController.swift in Sources */,
+				5EF34F3C294A355E00CEC902 /* DashboardViewController.swift in Sources */,
+				5E0B0211296EED7100697C19 /* AttendanceDetailsViewController.swift in Sources */,
+				5E4D20BC2955BF2D00989062 /* UserModel.swift in Sources */,
+				5E0B020F296EED4600697C19 /* TaskViewDetailsViewController.swift in Sources */,
+				5EF34F0B294A326200CEC902 /* AppDelegate.swift in Sources */,
+				5EFA9E22296F057E00A48D45 /* HolidayNSTableCell.swift in Sources */,
+				5EFA9E1C296F054200A48D45 /* StatusReportNSTableCell.swift in Sources */,
+				5EFA9E24296F058800A48D45 /* MeetingNSTableCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF34F17294A326500CEC902 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF34F20294A326500CEC902 /* TrackerForMakeathonTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5EF34F21294A326500CEC902 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EF34F2C294A326500CEC902 /* TrackerForMakeathonUITestsLaunchTests.swift in Sources */,
+				5EF34F2A294A326500CEC902 /* TrackerForMakeathonUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5EF34F1D294A326500CEC902 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5EF34F06294A326200CEC902 /* TrackerForMakeathon */;
+			targetProxy = 5EF34F1C294A326500CEC902 /* PBXContainerItemProxy */;
+		};
+		5EF34F27294A326500CEC902 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5EF34F06294A326200CEC902 /* TrackerForMakeathon */;
+			targetProxy = 5EF34F26294A326500CEC902 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5EF34F13294A326400CEC902 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EF34F14294A326400CEC902 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5EF34F2D294A326500CEC902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5EF34F2E294A326500CEC902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		5EF34F30294A326500CEC902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TrackerForMakeathon/TrackerForMakeathon.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TrackerForMakeathon;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackerformakeathon.gaurav.TrackerForMakeathon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5EF34F31294A326500CEC902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TrackerForMakeathon/TrackerForMakeathon.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TrackerForMakeathon;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackerformakeathon.gaurav.TrackerForMakeathon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5EF34F33294A326500CEC902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackerformakeathon.gaurav.TrackerForMakeathonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrackerForMakeathon.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TrackerForMakeathon";
+			};
+			name = Debug;
+		};
+		5EF34F34294A326500CEC902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackerformakeathon.gaurav.TrackerForMakeathonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrackerForMakeathon.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TrackerForMakeathon";
+			};
+			name = Release;
+		};
+		5EF34F36294A326500CEC902 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackerformakeathon.gaurav.TrackerForMakeathonUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TrackerForMakeathon;
+			};
+			name = Debug;
+		};
+		5EF34F37294A326500CEC902 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trackerformakeathon.gaurav.TrackerForMakeathonUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TrackerForMakeathon;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5EF34F02294A326200CEC902 /* Build configuration list for PBXProject "TrackerForMakeathon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EF34F2D294A326500CEC902 /* Debug */,
+				5EF34F2E294A326500CEC902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5EF34F2F294A326500CEC902 /* Build configuration list for PBXNativeTarget "TrackerForMakeathon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EF34F30294A326500CEC902 /* Debug */,
+				5EF34F31294A326500CEC902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5EF34F32294A326500CEC902 /* Build configuration list for PBXNativeTarget "TrackerForMakeathonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EF34F33294A326500CEC902 /* Debug */,
+				5EF34F34294A326500CEC902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5EF34F35294A326500CEC902 /* Build configuration list for PBXNativeTarget "TrackerForMakeathonUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EF34F36294A326500CEC902 /* Debug */,
+				5EF34F37294A326500CEC902 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5EF34F0E294A326200CEC902 /* TrackerForMakeathon.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5EF34F0F294A326200CEC902 /* TrackerForMakeathon.xcdatamodel */,
+			);
+			currentVersion = 5EF34F0F294A326200CEC902 /* TrackerForMakeathon.xcdatamodel */;
+			path = TrackerForMakeathon.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5EF34EFF294A326200CEC902 /* Project object */;
+}
