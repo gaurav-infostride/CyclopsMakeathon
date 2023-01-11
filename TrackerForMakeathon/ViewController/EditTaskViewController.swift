@@ -34,9 +34,7 @@ class EditTaskViewController: NSViewController {
     }
     
     @IBAction func onSave(_ sender: Any) {
-        viewModel.taskData?.timeAdded? = date
-        viewModel.taskData?.taskName = self.editTastTextField.stringValue
-        viewModel.taskData?.taskDiscription = self.editTastTextField.stringValue
+        
         dismiss(self)
     }
     

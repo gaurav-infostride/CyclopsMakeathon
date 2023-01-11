@@ -18,7 +18,6 @@ class UserViewModel {
     
     var attendanceData : AttendanceModel?
     var taskModel : TaskDataModel?
-    var taskData : TaskData?
     
     var authenticationData : AuthenticationDataModel?
     var loginData : LoginDataModel?

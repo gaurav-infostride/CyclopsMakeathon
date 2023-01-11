@@ -12,16 +12,33 @@ struct AttendanceModel{
     
 }
 
+
+var taskModel = TaskDataModel()
 //TaskDataSource/Model
 struct TaskDataModel{
     var taskArray:[TaskData] = []
 }
-
 struct TaskData{
     var timeAdded:Date?
     var taskName:String?
     var taskDiscription:String?
     var taskDoca:String?
+    init(timeAdded: Date?, taskName: String?,taskDiscription:String?,taskDoca:String?) {
+        self.timeAdded = timeAdded
+        self.taskName = taskName
+        self.taskDiscription = taskDiscription
+        self.taskDoca = taskDoca
+    }
+}
+
+
+//TaskDataSource/Model
+struct TaskDataModelc{
+    var taskArray:[TaskData] = []
+}
+
+struct TaskDatac{
+    
     
 }
 

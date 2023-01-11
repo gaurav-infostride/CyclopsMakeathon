@@ -77,19 +77,7 @@ class DashboardViewController: NSViewController {
     }
     
     
-    var taskModel = TaskDataModel()
-    //TaskDataSource/Model
-    struct TaskDataModel{
-        var taskArray:[TaskData] = []
-    }
-    struct TaskData{
-        var timeAdded:Date?
-        var taskName:String?
-        init(timeAdded: Date?, taskName: String?) {
-            self.timeAdded = timeAdded
-            self.taskName = taskName
-        }
-    }
+
     
     
     // Declare the timer as a property
@@ -152,6 +140,8 @@ class DashboardViewController: NSViewController {
     
     
     let viewModel = UserViewModel.shared.self
+//    var taskData = TaskData()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,7 +224,7 @@ class DashboardViewController: NSViewController {
             print("Add Task")
             return
         }
-        var addTask = TaskData.init(timeAdded: date, taskName: addTaskTextField.stringValue)
+        var addTask = TaskData(timeAdded: date, taskName: addTaskTextField.stringValue, taskDiscription: "", taskDoca: "") 
         taskModel.taskArray.append(addTask)
         addTaskTableView.reloadData()
 //        addTaskTextField.stringValue = ""
@@ -381,7 +371,7 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
             if segue.identifier == k.Segue.editTaskSegue{
                 if let vc = segue.destinationController as? EditTaskViewController {
-                    vc.task = self.addTaskTextField.stringValue
+//                    vc.task = ""//self.addTaskTextField.stringValue
                 }
             }
         }
