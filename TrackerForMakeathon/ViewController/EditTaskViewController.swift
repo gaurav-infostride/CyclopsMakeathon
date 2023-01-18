@@ -12,15 +12,21 @@ class EditTaskViewController: NSViewController {
     @IBOutlet var taskDiscriptionTextView: NSTextView!
     @IBOutlet weak var taskDetailsDocCollectionView: NSCollectionView!
     
+    let viewModel = UserViewModel.shared
+    
     // Create Date
     let date = Date()
-    let viewModel = UserViewModel.shared
-    var task:String?
     
+    
+    var task:String?
+    var createdAt:String?
+    var taskId:String?
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        editTastTextField.stringValue = task ?? ""
         taskDetailsDocCollectionView.dataSource = self
         taskDetailsDocCollectionView.delegate = self
         
@@ -29,13 +35,23 @@ class EditTaskViewController: NSViewController {
     }
     override func viewWillAppear() {
         super.viewWillAppear()
-        editTastTextField.stringValue = task ?? ""
-        print("task on EditTaskViewController",task)
+//        print(task)
+//        print(createdAt)
+//        print("task on EditTaskViewController",task)
     }
     
     @IBAction func onSave(_ sender: Any) {
+        let updatedAt = k.at(date: date)
+        print(taskId)
+        if let safeId = taskId{
+            viewModel.updateTask(id: safeId, description: taskDiscriptionTextView.string) {
+                print("safeId in update task",safeId)
+                print("taskDiscriptionTextView text",self.taskDiscriptionTextView.string)
+                self.dismiss(self)
+                k.showAllert(title: "Update Task", message: "Task updated Successfully")
+            }
+        }
         
-        dismiss(self)
     }
     
 }

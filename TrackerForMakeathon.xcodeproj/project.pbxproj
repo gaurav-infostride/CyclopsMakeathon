@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E0B020F296EED4600697C19 /* TaskViewDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B020E296EED4500697C19 /* TaskViewDetailsViewController.swift */; };
 		5E0B0211296EED7100697C19 /* AttendanceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0B0210296EED7100697C19 /* AttendanceDetailsViewController.swift */; };
 		5E1E87EE296310F3006D3DB6 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1E87ED296310F3006D3DB6 /* ContainerViewController.swift */; };
 		5E1E87FE296379FF006D3DB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1E87FD296379FF006D3DB6 /* ProfileViewController.swift */; };
 		5E3FAA14294D1ED300260EA9 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FAA13294D1ED300260EA9 /* Helper.swift */; };
 		5E4D20BA2955BF1B00989062 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D20B92955BF1B00989062 /* UserViewModel.swift */; };
 		5E4D20BC2955BF2D00989062 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4D20BB2955BF2D00989062 /* UserModel.swift */; };
+		5E851CFE2978290F0004C613 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E851CFD2978290F0004C613 /* TaskDetailsViewController.swift */; };
 		5EED9E6B295C4D6800FCBFB3 /* EditTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED9E6A295C4D6800FCBFB3 /* EditTaskViewController.swift */; };
 		5EED9E73295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EED9E71295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift */; };
 		5EED9E74295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EED9E72295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib */; };
@@ -51,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5E0B020E296EED4500697C19 /* TaskViewDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewDetailsViewController.swift; sourceTree = "<group>"; };
 		5E0B0210296EED7100697C19 /* AttendanceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceDetailsViewController.swift; sourceTree = "<group>"; };
 		5E1E87ED296310F3006D3DB6 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		5E1E87FD296379FF006D3DB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5E3FAA13294D1ED300260EA9 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		5E4D20B92955BF1B00989062 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		5E4D20BB2955BF2D00989062 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		5E851CFD2978290F0004C613 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		5EED9E6A295C4D6800FCBFB3 /* EditTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskViewController.swift; sourceTree = "<group>"; };
 		5EED9E71295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskDetailCollectionViewItem.swift; sourceTree = "<group>"; };
 		5EED9E72295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTaskDetailCollectionViewItem.xib; sourceTree = "<group>"; };
@@ -178,8 +178,8 @@
 				5EED9E6A295C4D6800FCBFB3 /* EditTaskViewController.swift */,
 				5E1E87ED296310F3006D3DB6 /* ContainerViewController.swift */,
 				5E1E87FD296379FF006D3DB6 /* ProfileViewController.swift */,
-				5E0B020E296EED4500697C19 /* TaskViewDetailsViewController.swift */,
 				5E0B0210296EED7100697C19 /* AttendanceDetailsViewController.swift */,
+				5E851CFD2978290F0004C613 /* TaskDetailsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -331,6 +331,7 @@
 				5E4D20BA2955BF1B00989062 /* UserViewModel.swift in Sources */,
 				5EF34F0D294A326200CEC902 /* ViewController.swift in Sources */,
 				5E1E87EE296310F3006D3DB6 /* ContainerViewController.swift in Sources */,
+				5E851CFE2978290F0004C613 /* TaskDetailsViewController.swift in Sources */,
 				5E1E87FE296379FF006D3DB6 /* ProfileViewController.swift in Sources */,
 				5EED9E73295C7A5800FCBFB3 /* EditTaskDetailCollectionViewItem.swift in Sources */,
 				5EFA9E1E296F056400A48D45 /* TimeIntervalNSTableCell.swift in Sources */,
@@ -340,7 +341,6 @@
 				5EF34F3C294A355E00CEC902 /* DashboardViewController.swift in Sources */,
 				5E0B0211296EED7100697C19 /* AttendanceDetailsViewController.swift in Sources */,
 				5E4D20BC2955BF2D00989062 /* UserModel.swift in Sources */,
-				5E0B020F296EED4600697C19 /* TaskViewDetailsViewController.swift in Sources */,
 				5EF34F0B294A326200CEC902 /* AppDelegate.swift in Sources */,
 				5EFA9E22296F057E00A48D45 /* HolidayNSTableCell.swift in Sources */,
 				5EFA9E1C296F054200A48D45 /* StatusReportNSTableCell.swift in Sources */,

@@ -1,13 +1,13 @@
 //
-//  TaskViewDetailsViewController.swift
+//  TaskDetailsViewController.swift
 //  TrackerForMakeathon
 //
-//  Created by Gaurav Kumar on 11/01/23.
+//  Created by Gaurav Kumar on 18/01/23.
 //
 
 import Cocoa
 
-class TaskViewDetailsViewController: NSViewController {
+class TaskDetailsViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

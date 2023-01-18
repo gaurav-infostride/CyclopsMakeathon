@@ -9,11 +9,41 @@ import Foundation
 import AppKit
 struct k{
     
+    static func allert(title:String, message:String) -> Bool{
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        
+        return alert.runModal() == NSApplication.ModalResponse.OK
+    }
+    
+    
+    static func showAllert(title:String, message:String){
+        DispatchQueue.main.async {
+            k.allert(title: title, message: message)
+        }
+    }
+    
+    //function takes cdate and return string format
+    static func at(date:Date) -> String{
+        let dateFormatter = DateFormatter()
+        let createdAt = date
+        dateFormatter.dateFormat = "MMM dd, yyyy hh:mm"
+        dateFormatter.string(from: createdAt)
+        return dateFormatter.string(from: createdAt)
+    }
     
     static let appName = ""
     
     struct Storyboard{
         static let main = "Main"
+    }
+    struct Url{
+        static let loginUrl = "http://10.20.1.70:8000/user/login"
+        static let profileUrl = "http://10.20.1.70:8000/user/details"
+        static let addTaskUrl = "http://10.20.1.70:8000/task/addtask"
+        static let getTaskUrl = "http://10.20.1.70:8000/task/gettask"
+        static let updateTaskUrl = "http://10.20.1.70:8000/task/updatetask"
     }
     
     struct ViewController{
@@ -21,7 +51,7 @@ struct k{
         static let containerVC = "ContainerViewController"
         static let dashboardVC = "Dashboard"
         static let attendanceDetailsVC = "AttendanceDetailsViewController"
-        static let taskDetailsVC = "TaskViewDetailsViewController"
+        static let taskDetailsVC = "TaskDetailsViewController"
         static let editTaskVC = "EditTaskViewController"
         static let profileVC = "ProfileViewController"
     }
@@ -78,7 +108,7 @@ struct k{
         static let punchInTimeCell = "punchInTimeCell"
         static let workDurationCell = "workDurationCell"
         static let breakDurationCell = "breakDurationCell"
-    
+        
         static let punchOutTimeCell = "punchOutTimeCell"
         static let durationCell = "durationCell"
         

@@ -17,17 +17,226 @@ class UserViewModel {
     
     
     var attendanceData : AttendanceModel?
-    var taskModel : TaskDataModel?
+    var addTaskModel : AddTaskModel2?
+    var getTaskModel : GetTaskModel?
+    var updateTask : UpdateTaskModel?
     
-    var authenticationData : AuthenticationDataModel?
-    var loginData : LoginDataModel?
+    
+    var loginData : LoginModel?
+    var profileModel : ProfileModel?
     
     
-    func userLogin(email:String?, password:String?,completion:@escaping()->Void){
-        // Prepare URL
-        let url = URL(string: "http://10.20.1.70:4000/user/login")
+    //Update task with parameters using bearer Token GET request
+    func updateTask(id:String, description:String, completion:@escaping()->Void){
+        let url = URL(string: k.Url.updateTaskUrl)
         guard let requestUrl = url else { fatalError() }
-        print("url ----> ",url)
+        //print("url ----> ",url)
+        
+        // Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        
+
+         //HTTP Request Parameters which will be sent in HTTP Request Body
+         let params = "id=\(String(describing: id))&description=\(String(describing: description))"; //"gourav@yopmail.com"   //"Gourav@1234"
+         print("params--->",params)
+        
+         //Set HTTP Request Body
+         request.httpBody = params.data(using: String.Encoding.utf8)
+        
+        
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let data = try decoder.decode(UpdateTaskModel.self, from: data)
+                    self.updateTask = data
+                    print("Update task data",data.error)
+                    if self.updateTask?.status == "SUCCESS" {
+                        completion()
+                    }else if self.updateTask?.status == "FAIL"{
+                        k.showAllert(title: data.status ?? "", message: self.updateTask?.error?.error?.message ?? "" )
+                    }else{
+                        k.showAllert(title: "Update Task", message: "Please check task id")
+                    }
+                } catch {
+                    k.showAllert(title: "Error !", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            } else {
+                k.showAllert(title: "Data not found !", message: "Login data not found!")
+                print("Error fetching data: \(String(describing: error))")
+            }
+            
+            
+        }
+        task.resume()
+        
+    }
+    
+    
+    
+    
+    //Update task with parameters using bearer Token GET request
+    func getTask(completion:@escaping()->Void){
+        guard let loginToken = loginData?.data?.token else{
+            k.showAllert(title: "User Token", message: "User token not available")
+            return
+        }
+        
+        //Prepare URL
+        let url = URL(string: k.Url.getTaskUrl)
+        guard let requestUrl = url else { fatalError() }
+        
+        
+        //Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
+       
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let data = try decoder.decode(GetTaskModel.self, from: data)
+                    self.getTaskModel = data
+                    if self.getTaskModel?.status == "SUCCESS" {
+                        completion()
+                    }else{
+                        k.showAllert(title: "Profile Data !", message: "Failed to get Profile Data")
+                    }
+                } catch {
+                    k.showAllert(title: "Profile Data !", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            }
+            
+            
+        }
+        task.resume()
+        
+    }
+    
+    
+ 
+    //Update task with parameters using bearer Token GET request
+    func addTask(taskTitle:String?, completion:@escaping()->Void){
+        guard let loginToken = loginData?.data?.token else{
+            k.showAllert(title: "User Token", message: "User token not available")
+            
+            return
+        }
+        
+        //Prepare URL
+        let url = URL(string: k.Url.addTaskUrl)
+        guard let requestUrl = url else { fatalError() }
+        
+        
+        //Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
+        
+        //Parameters which will be sent in HTTP Request Body
+        let params = "title=\(String(describing: taskTitle))";
+        print("params--->",params)
+        
+        // Sending Parameters HTTP Request Body
+        request.httpBody = params.data(using: String.Encoding.utf8)
+       
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let data = try decoder.decode(AddTaskModel2.self, from: data)
+                    self.addTaskModel = data
+                    if self.addTaskModel?.status == "SUCCESS" {
+                        completion()
+                    }else{
+                        k.showAllert(title: "Profile Data !", message: "Failed to get Profile Data")
+                    }
+                } catch {
+                    k.showAllert(title: "Profile Data !", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            }
+            
+            
+        }
+        task.resume()
+        
+    }
+    
+    
+
+    //Get profile data using bearer Token GET request
+    func getProfileData(completion:@escaping()->Void){
+        guard let loginToken = loginData?.data?.token else{
+            k.showAllert(title: "User Token", message: "User token not available")
+            
+            return
+        }
+        
+        //Prepare URL
+        let url = URL(string: k.Url.profileUrl)
+        guard let requestUrl = url else { fatalError() }
+        
+        
+        //Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let data = try decoder.decode(ProfileModel.self, from: data)
+                    self.profileModel = data
+                    if self.profileModel?.status == "SUCCESS" {
+                        completion()
+                    }else{
+                        k.showAllert(title: "Profile Data !", message: "Failed to get Profile Data")
+                    }
+                } catch {
+                    k.showAllert(title: "Profile Data !", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            }
+            
+            
+        }
+        task.resume()
+        
+    }
+    
+    
+    
+    //User Login using id an password POST Request
+    func userLogin(email:String?, password:String?,completion:@escaping()->Void){
+        // Prepare URL http://10.20.1.70:8000/user/login
+        let url = URL(string: k.Url.loginUrl)
+        guard let requestUrl = url else { fatalError() }
+        //        print("url ----> ",url)
         
         // Prepare URL Request Object
         var request = URLRequest(url: requestUrl)
@@ -35,97 +244,45 @@ class UserViewModel {
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
         if let email = email, let password = password{
-            let postString = "email=\(String(describing: email))&password=\(String(describing: password))"; //"gourav@yopmail.com"   //"Gourav@1234"
-            print(postString)
+            let params = "email=\(String(describing: email))&password=\(String(describing: password))"; //"gourav@yopmail.com"   //"Gourav@1234"
+            print("params--->",params)
             
             // Set HTTP Request Body
-            request.httpBody = postString.data(using: String.Encoding.utf8)
+            request.httpBody = params.data(using: String.Encoding.utf8)
             // Perform HTTP Request
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if (error != nil) {
-                    print(error as Any)
-                } else{
-                    
-                    if let data = data {
-                        let decoder = JSONDecoder()
-                        do {
-                            let model = try decoder.decode(LoginDataModel.self, from: data)
-                            
-                            self.loginData = model
-                            completion()
-                            print(self.loginData)
-                            // Save the model to your database or store it in a property
-                        } catch {
-                            print("Error decoding model: \(error)")
-                        }
-                    } else {
-                        print("Error fetching data: \(error)")
-                    }
+                guard error == nil else {
+                    return
                 }
-                
-                
-            }
-            task.resume()
-        }
-
-    }
-    
-    
-    func generateAuthenticationToken(completion:@escaping()->Void) {
-        let headers = [
-            "accept": "application/json",
-            "dev-id": "prescribery-dev-gwLs26wh70",
-            "x-api-key": "1052553f3dad2331689a46e524a7878d426a2c9bd3d8381a05a073288846adc0"
-        ]
-        
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.tryterra.co/v2/auth/generateAuthToken")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error as Any)
-            } else{
                 
                 if let data = data {
                     let decoder = JSONDecoder()
                     do {
-                        let model = try decoder.decode(LoginDataModel.self, from: data)
-                        
+                        let model = try decoder.decode(LoginModel.self, from: data)
                         self.loginData = model
-                        completion()
-                        // Save the model to your database or store it in a property
+                        //                        print("Login Data",self.loginData?.data?.user)
+                        if self.loginData?.status == "SUCCESS" {
+                            completion()
+                        }else{
+                            //                            print("Login Failed !")
+                            k.showAllert(title: "Login Failed !", message: "Please check email and password")
+                        }
                     } catch {
+                        k.showAllert(title: "Login Failed !", message: error.localizedDescription)
                         print("Error decoding model: \(error)")
                     }
-                } else {
-                    print("Error fetching data: \(error)")
                 }
-                
-                
-                //              let httpResponse = response as? HTTPURLResponse
-                //              print(httpResponse)
-                //              let outputStr  = String(data: data!, encoding: String.Encoding.utf8) as String?
-                //              print(outputStr)
             }
-            
-            
-            //                // Check for Error
-            //                if let error = error {
-            //                    print("Error took place \(error)")
-            //                    return
-            //                }
-            //
-            //                // Convert HTTP Response Data to a String
-            //                if let data = data, let dataString = String(data: data, encoding: .utf8) {
-            //                    print("Response data string:\n \(dataString)")
-            //                }
-            
-        })
+            task.resume()
+        }
         
-        dataTask.resume()
     }
+    
+    
+    
+    
+   
+    
+    
 }
+

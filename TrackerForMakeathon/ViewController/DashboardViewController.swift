@@ -16,6 +16,11 @@ class DashboardViewController: NSViewController {
     
     var isPunchedIn = false
     
+    //For add task
+    var taskCreatedAt:String?
+    var taskAtCell : String?
+    var taskId : String?
+    
     //DurationModel
     var durationDataModel = DureationDataModel()
     struct DureationDataModel{
@@ -198,13 +203,32 @@ class DashboardViewController: NSViewController {
         
     }
     override func viewWillAppear() {
-        //var red = CGColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
         super.viewWillAppear()
-        
-        
-        
-        
+        //var red = CGColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        getSubmitedTask()
+        viewModel.getProfileData {
+            if let myUser = self.viewModel.profileModel?.data?.user{
+                DispatchQueue.main.async {
+                    self.nameLabel.stringValue = "\(myUser.firstName ?? "") \(myUser.lastName ?? "")"
+                    self.employIdLabel.stringValue = String("Employee-Id: \(myUser.employeeCode ?? "")")
+                    self.mobileNoLabel.stringValue = myUser.phone ?? ""
+                    self.gmailLabel.stringValue = myUser.email ?? ""
+                    self.designationLabel.stringValue = myUser.designation ?? ""
+//                    self.reportingManagerLabel.stringValue = "\(myUser.reportingManager?.firstName ?? "") \(myUser.reportingManager?.lastName ?? "")"
+                }
+            }
+        }
     }
+    
+    func getSubmitedTask(){
+        viewModel.getTask {
+            DispatchQueue.main.async {
+                self.addTaskTableView.reloadData()
+            }
+            
+        }
+    }
+    
     
     override var representedObject: Any? {
         didSet {
@@ -221,13 +245,16 @@ class DashboardViewController: NSViewController {
 //            return
 //        }
         guard addTaskTextField.stringValue != "" else {
-            print("Add Task")
+            k.showAllert(title: "Add Task", message: "Enter task title to add")
             return
         }
-        var addTask = TaskData(timeAdded: date, taskName: addTaskTextField.stringValue, taskDiscription: "", taskDoca: "") 
-        taskModel.taskArray.append(addTask)
-        addTaskTableView.reloadData()
-//        addTaskTextField.stringValue = ""
+//        taskCreatedAt = k.at(date: date)
+        viewModel.addTask(taskTitle: addTaskTextField.stringValue) {
+            k.showAllert(title: "Add Task", message: "Task add successfully")
+            self.getSubmitedTask()
+        }
+        addTaskTextField.stringValue = ""
+        
     }
     
     
@@ -353,7 +380,7 @@ class DashboardViewController: NSViewController {
 extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView == addTaskTableView {
-            return taskModel.taskArray.count
+            return self.viewModel.getTaskModel?.data?.task?.count ?? 0
         } else if tableView == timeIntervalNSTableView {
             return punchInTimeDataModel.punchInTimeArray.count
         }else if tableView == holidayNSTableView {
@@ -371,7 +398,9 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
             if segue.identifier == k.Segue.editTaskSegue{
                 if let vc = segue.destinationController as? EditTaskViewController {
-//                    vc.task = ""//self.addTaskTextField.stringValue
+                    vc.task = taskAtCell
+                    vc.createdAt = taskCreatedAt
+                    vc.taskId = taskId
                 }
             }
         }
@@ -384,8 +413,12 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.taskColumn ) {
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.taskCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? StatusReportNSTableCell else { return nil }
-                let showtask = taskModel.taskArray[row].taskName
-                cellView.taskTextField.stringValue = showtask ?? ""
+                if let taskTitle =  self.viewModel.getTaskModel?.data?.task?[row].title{
+                    cellView.taskTextField.stringValue = taskTitle
+                    print(self.viewModel.getTaskModel?.data?.task?[row].title ?? "")
+                    print(self.viewModel.getTaskModel?.data?.task?[row].id ?? "")
+                    print(taskTitle)
+                }
                 return cellView
             }
             
@@ -393,9 +426,11 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             else if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.editBtnColumn ) {
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.editBtnCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? StatusReportNSTableCell else { return nil }
+                self.taskAtCell = self.viewModel.getTaskModel?.data?.task?[row].title
+                self.taskId = self.viewModel.getTaskModel?.data?.task?[row].id
                 cellView.callback = {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.performSegue(withIdentifier: k.Segue.editTaskSegue, sender: self)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: k.Segue.editTaskSegue, sender: self)
                     }
                 }
                 

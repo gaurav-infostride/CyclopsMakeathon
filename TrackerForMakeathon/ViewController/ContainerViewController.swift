@@ -24,7 +24,7 @@ class ContainerViewController: NSViewController {
     @IBOutlet weak var attendanceBtn: NSButton!
     
     var dashboardVC : DashboardViewController!
-    var taskVC : TaskViewDetailsViewController!
+    var taskVC : TaskDetailsViewController!
     var attendanceVC : AttendanceDetailsViewController!
     
     
@@ -35,7 +35,7 @@ class ContainerViewController: NSViewController {
         
         // Create a child view controller and add it to the current view controller.
         dashboardVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.dashboardVC) as? DashboardViewController
-        taskVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.taskDetailsVC) as? TaskViewDetailsViewController
+        taskVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.taskDetailsVC) as? TaskDetailsViewController
         attendanceVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.attendanceDetailsVC) as? AttendanceDetailsViewController
         
         //Add the view controller to the container.
