@@ -106,6 +106,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5EA34653297B0737003EB0FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5E4D20BB2955BF2D00989062 /* UserModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5EA34654297B0740003EB0FD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5E4D20B92955BF1B00989062 /* UserViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5EA34655297B0749003EB0FD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5E3FAA13294D1ED300260EA9 /* Helper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		5EA34656297B0751003EB0FD /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				5EF34F0A294A326200CEC902 /* AppDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		5EED9E6C295C561800FCBFB3 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,10 +170,10 @@
 		5EF34F09294A326200CEC902 /* TrackerForMakeathon */ = {
 			isa = PBXGroup;
 			children = (
-				5EF34F0A294A326200CEC902 /* AppDelegate.swift */,
-				5E3FAA13294D1ED300260EA9 /* Helper.swift */,
-				5E4D20BB2955BF2D00989062 /* UserModel.swift */,
-				5E4D20B92955BF1B00989062 /* UserViewModel.swift */,
+				5EA34656297B0751003EB0FD /* Delegate */,
+				5EA34655297B0749003EB0FD /* Helper */,
+				5EA34653297B0737003EB0FD /* Model */,
+				5EA34654297B0740003EB0FD /* ViewModel */,
 				5EFA9E1A296F04AB00A48D45 /* TableViewCell */,
 				5EF34F3A294A342900CEC902 /* ViewController */,
 				5EED9E6C295C561800FCBFB3 /* CollectionView */,
