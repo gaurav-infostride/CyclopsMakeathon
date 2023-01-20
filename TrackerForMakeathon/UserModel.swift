@@ -15,18 +15,12 @@ import Foundation
 struct UpdateTaskModel: Codable {
     let status, message: String?
     let data: UpdateTask?
-    let error : UpdateTaskError?
+    let error : Error?
 }
 
 // MARK: - UpdateTask
 struct UpdateTask: Codable {
     let data: Task?
-}
-
-// MARK: - UpdateTaskError Model
-struct UpdateTaskError: Codable {
-    let error: Error?
-    let status: String?
 }
 
 // MARK: - Error

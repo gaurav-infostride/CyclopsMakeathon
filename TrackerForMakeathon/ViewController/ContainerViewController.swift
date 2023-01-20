@@ -7,13 +7,14 @@
 
 import Cocoa
 
-class ContainerViewController: NSViewController {
+class ContainerViewController: NSViewController, NSWindowDelegate {
     
     
     @IBOutlet weak var topView: NSView!
     @IBOutlet weak var container: NSView!
     
     
+    @IBOutlet var parentView: NSView!
     @IBOutlet weak var profileView: NSView!
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var profileBtn: NSButton!
@@ -30,9 +31,6 @@ class ContainerViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        container.wantsLayer = true
-        container.layer?.backgroundColor = NSColor.brown.cgColor
-        
         // Create a child view controller and add it to the current view controller.
         dashboardVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.dashboardVC) as? DashboardViewController
         taskVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.taskDetailsVC) as? TaskDetailsViewController
@@ -41,69 +39,91 @@ class ContainerViewController: NSViewController {
         //Add the view controller to the container.
 //        addChild(dashboardVC)
         dashboardVC.view.frame = self.container.bounds
-//        self.container.addSubview(dashboardVC.view)
+        self.container.addSubview(dashboardVC.view)
         view.addSubview(dashboardVC.view)
         
-        setupContainerView()
-        
-        
+        print("Container in viewdidload -=>", container)
     }
-    
-    func setupContainerView() {
-        let containerView = NSView(frame: container.bounds)
-        containerView.autoresizingMask = [.width, .height]
-        containerView.addSubview(container)
-    }
-    
-    func setupChildView(childView:NSView) {
-        let childView = NSView(frame: container.frame)
-        childView.autoresizingMask = [.width, .height]
-        view.addSubview(childView)
-    }
-    
-    
-    func windowDidResize(_ notification: Notification) {
-        container.setFrameSize(container!.frame.size)
-    }
-    
-    func resizeChildView(newView:NSView,containerView: NSView!){
-        newView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        newView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-        newView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        newView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-    }
-    
-    func resizeV(controller:NSViewController){
-        NSLayoutConstraint.activate([
-            controller.view.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
-            controller.view.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 20),
-            controller.view.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
-            controller.view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 20)
-        ])
-        
-    }
-    func hideContentController(content: NSViewController) {
-        content.view.viewWillMove(toSuperview: nil)
-        content.view.removeFromSuperview()
-        content.removeFromParent()
-    }
-    
     
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        self.topView.wantsLayer = true
-        var topViewColor = CGColor(red: 100.0/255.0, green: 130.0/255.0, blue: 200/255.0, alpha: 1.0)
-        topView.layer?.backgroundColor = CGColor.black
-        
+        topView.wantsLayer = true
+        container.wantsLayer = true
         profileView.wantsLayer = true
+        
+        topView.layer?.backgroundColor = CGColor.black
         profileView.layer?.cornerRadius = CGRectGetWidth(self.profileView.frame)/2
         dashboardBtn.contentTintColor = .systemTeal
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        container.window?.delegate = self
+        view.window?.delegate = self
+        print("Container's View in ViewDidAppear -=>", container)
+    }
+    
+    
+    
+    
+    func windowDidResize(_ notification: Notification) {
+        
+        container.setFrameSize(view.frame.size)
+        print(container.frame.size)
+        print(view.frame.size)
+    }
+    
+    
+//    func setupContainerView() {
+//        let containerView = NSView(frame: container.bounds)
+//        containerView.autoresizingMask = [.width, .height]
+//        containerView.addSubview(container)
+//    }
+//    
+//    func setupChildView(childView:NSView) {
+//        let childView = NSView(frame: container.frame)
+//        childView.autoresizingMask = [.width, .height]
+//        view.addSubview(childView)
+//    }
+//    
+//    
+    
+//    
+//    func resizeChildView(newView:NSView,containerView: NSView!){
+//        newView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+//        newView.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+//        newView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+//        newView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+//    }
+//    
+//    func resizeV(controller:NSViewController){
+//        NSLayoutConstraint.activate([
+//            controller.view.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+//            controller.view.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 20),
+//            controller.view.topAnchor.constraint(equalTo: container.topAnchor, constant: 20),
+//            controller.view.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: 20)
+//        ])
+//        
+//    }
+//    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func onProfileBtn(_ sender: Any) {
         print("hii")
         performSegue(withIdentifier: k.Segue.editProfileSegue, sender: self)
+    }
+    
+    
+    func hideContentController(content: NSViewController) {
+        content.view.viewWillMove(toSuperview: nil)
+        content.view.removeFromSuperview()
+        content.removeFromParent()
     }
     
     
@@ -115,7 +135,7 @@ class ContainerViewController: NSViewController {
         hideContentController(content: attendanceVC)
         
         addChild(dashboardVC)
-        view.addSubview(dashboardVC.view)
+        container.addSubview(dashboardVC.view)
         
         
     }
@@ -129,7 +149,7 @@ class ContainerViewController: NSViewController {
         hideContentController(content: attendanceVC)
         
         addChild(taskVC)
-        view.addSubview(taskVC.view)
+        container.addSubview(taskVC.view)
         
         
     }
@@ -143,7 +163,7 @@ class ContainerViewController: NSViewController {
         hideContentController(content: taskVC)
         
         addChild(attendanceVC)
-        view.addSubview(attendanceVC.view)
+        container.addSubview(attendanceVC.view)
         
     }
     

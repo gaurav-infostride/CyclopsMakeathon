@@ -70,7 +70,7 @@ class ViewController: NSViewController {
             }
 
             DispatchQueue.main.async {
-                if let viewController = self.storyboard?.instantiateController(withIdentifier: k.ViewController.dashboardVC) as? DashboardViewController {
+                if let viewController = self.storyboard?.instantiateController(withIdentifier: k.ViewController.containerVC) as? ContainerViewController {
                     self.view.window?.contentViewController = viewController
                 }
             }

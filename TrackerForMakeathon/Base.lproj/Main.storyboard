@@ -898,7 +898,7 @@
                                 <rect key="frame" x="0.0" y="705" width="1210" height="60"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sMy-P0-RsC">
-                                        <rect key="frame" x="18" y="15" width="104" height="30"/>
+                                        <rect key="frame" x="18" y="8" width="104" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="mdk-rF-zI7"/>
                                         </constraints>
@@ -1006,26 +1006,25 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="cys-M4-oxh" secondAttribute="trailing" constant="10" id="1Wo-tb-8gS"/>
                                     <constraint firstAttribute="height" constant="60" id="9ih-wb-Mm3"/>
-                                    <constraint firstItem="sMy-P0-RsC" firstAttribute="top" secondItem="yP0-Yc-WIf" secondAttribute="top" constant="15" id="DNb-18-mNw"/>
                                     <constraint firstItem="vBW-cI-aTF" firstAttribute="leading" secondItem="sMy-P0-RsC" secondAttribute="trailing" constant="10" id="DUI-Gv-731"/>
                                     <constraint firstAttribute="bottom" secondItem="cys-M4-oxh" secondAttribute="bottom" constant="5" id="EV3-5K-deS"/>
                                     <constraint firstItem="cys-M4-oxh" firstAttribute="top" secondItem="yP0-Yc-WIf" secondAttribute="top" constant="5" id="Vlx-qC-4tw"/>
                                     <constraint firstAttribute="bottom" secondItem="vBW-cI-aTF" secondAttribute="bottom" constant="5" id="Zmd-xr-opX"/>
                                     <constraint firstItem="sMy-P0-RsC" firstAttribute="leading" secondItem="yP0-Yc-WIf" secondAttribute="leading" constant="20" id="mVF-uK-3d5"/>
-                                    <constraint firstAttribute="bottom" secondItem="sMy-P0-RsC" secondAttribute="bottom" constant="15" id="t5q-6p-bkl"/>
+                                    <constraint firstAttribute="bottom" secondItem="sMy-P0-RsC" secondAttribute="bottom" constant="8" id="t5q-6p-bkl"/>
                                 </constraints>
                             </customView>
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="X6Y-Mk-cte">
                                 <rect key="frame" x="0.0" y="0.0" width="1210" height="700"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="700" id="HJs-ki-ueZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="700" id="HJs-ki-ueZ"/>
                                 </constraints>
                             </containerView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="X6Y-Mk-cte" secondAttribute="trailing" id="CRV-Q1-SOa"/>
                             <constraint firstItem="yP0-Yc-WIf" firstAttribute="top" secondItem="43K-dC-Rw6" secondAttribute="top" id="Mlv-0P-3Rk"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="X6Y-Mk-cte" secondAttribute="bottom" id="RPH-xz-i0l"/>
+                            <constraint firstAttribute="bottom" secondItem="X6Y-Mk-cte" secondAttribute="bottom" id="RPH-xz-i0l"/>
                             <constraint firstItem="yP0-Yc-WIf" firstAttribute="leading" secondItem="43K-dC-Rw6" secondAttribute="leading" id="Wqf-az-Ktu"/>
                             <constraint firstAttribute="trailing" secondItem="yP0-Yc-WIf" secondAttribute="trailing" id="bja-rX-SVZ"/>
                             <constraint firstItem="X6Y-Mk-cte" firstAttribute="top" secondItem="43K-dC-Rw6" secondAttribute="top" constant="65" id="eaT-MX-6VF"/>
@@ -1038,6 +1037,7 @@
                         <outlet property="container" destination="X6Y-Mk-cte" id="Voh-QF-MuB"/>
                         <outlet property="dashboardBtn" destination="td6-WZ-Kzy" id="SD4-q1-dUQ"/>
                         <outlet property="imageView" destination="g7I-hw-5rg" id="74w-zO-XRK"/>
+                        <outlet property="parentView" destination="43K-dC-Rw6" id="9eD-PC-4K6"/>
                         <outlet property="profileBtn" destination="uKN-li-5XE" id="KUe-2w-6Dv"/>
                         <outlet property="profileView" destination="cys-M4-oxh" id="Uxf-eN-3hy"/>
                         <outlet property="topView" destination="yP0-Yc-WIf" id="3BA-Sj-Pp8"/>
@@ -1469,7 +1469,23 @@
                                                                     <rect key="frame" x="333" y="2" width="42" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CQA-UL-Qd2">
+                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6E2-Ug-AmI" userLabel="ViewTaskDetails">
+                                                                            <rect key="frame" x="-7" y="-5" width="44" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="30" id="3P4-qe-Ljs"/>
+                                                                                <constraint firstAttribute="height" constant="20" id="cFt-7e-jbj"/>
+                                                                            </constraints>
+                                                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="eye" catalog="system" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CO5-VF-fLe">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system"/>
+                                                                            </buttonCell>
+                                                                            <color key="bezelColor" name="systemTealColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="contentTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <connections>
+                                                                                <action selector="onViewBtn:" target="Ub1-M4-cRN" id="RqZ-Xm-tcO"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CQA-UL-Qd2" userLabel="EditTaskDetailsBtn">
                                                                             <rect key="frame" x="-7" y="-5" width="44" height="32"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="30" id="8ml-jx-q1b"/>
@@ -1487,11 +1503,14 @@
                                                                         </button>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="6E2-Ug-AmI" firstAttribute="centerY" secondItem="Ub1-M4-cRN" secondAttribute="centerY" id="Gep-F7-l11"/>
                                                                         <constraint firstItem="CQA-UL-Qd2" firstAttribute="centerY" secondItem="Ub1-M4-cRN" secondAttribute="centerY" id="L0b-zY-PKX"/>
                                                                         <constraint firstItem="CQA-UL-Qd2" firstAttribute="leading" secondItem="Ub1-M4-cRN" secondAttribute="leading" id="f5Q-ck-lVa"/>
+                                                                        <constraint firstItem="6E2-Ug-AmI" firstAttribute="leading" secondItem="Ub1-M4-cRN" secondAttribute="leading" id="pQ5-MG-BbJ"/>
                                                                     </constraints>
                                                                     <connections>
-                                                                        <outlet property="editBtn" destination="CQA-UL-Qd2" id="tA0-Kn-lnC"/>
+                                                                        <outlet property="editBtn" destination="CQA-UL-Qd2" id="ORN-Lj-wAp"/>
+                                                                        <outlet property="viewTaskDetailsBtn" destination="6E2-Ug-AmI" id="auV-lO-WY3"/>
                                                                     </connections>
                                                                 </tableCellView>
                                                             </prototypeCellViews>
@@ -2937,6 +2956,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye" catalog="system" width="20" height="13"/>
         <image name="pencil" catalog="system" width="13" height="13"/>
         <image name="plus" catalog="system" width="15" height="13"/>
         <image name="profileImage" width="600" height="750"/>

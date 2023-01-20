@@ -415,9 +415,6 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? StatusReportNSTableCell else { return nil }
                 if let taskTitle =  self.viewModel.getTaskModel?.data?.task?[row].title{
                     cellView.taskTextField.stringValue = taskTitle
-                    print(self.viewModel.getTaskModel?.data?.task?[row].title ?? "")
-                    print(self.viewModel.getTaskModel?.data?.task?[row].id ?? "")
-                    print(taskTitle)
                 }
                 return cellView
             }
@@ -428,6 +425,14 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? StatusReportNSTableCell else { return nil }
                 self.taskAtCell = self.viewModel.getTaskModel?.data?.task?[row].title
                 self.taskId = self.viewModel.getTaskModel?.data?.task?[row].id
+                if self.viewModel.getTaskModel?.data?.task?[row].submited  == true{
+                    cellView.editBtn.isHidden = true
+                    cellView.viewTaskDetailsBtn.isHidden = false
+                } else{
+                    cellView.editBtn.isHidden = false
+                    cellView.viewTaskDetailsBtn.isHidden = true
+                }
+                
                 cellView.callback = {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: k.Segue.editTaskSegue, sender: self)

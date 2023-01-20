@@ -21,7 +21,6 @@ class EditTaskViewController: NSViewController {
     var task:String?
     var createdAt:String?
     var taskId:String?
-   
     
     
     override func viewDidLoad() {
@@ -42,13 +41,20 @@ class EditTaskViewController: NSViewController {
     
     @IBAction func onSave(_ sender: Any) {
         let updatedAt = k.at(date: date)
-        print(taskId)
         if let safeId = taskId{
-            viewModel.updateTask(id: safeId, description: taskDiscriptionTextView.string) {
-                print("safeId in update task",safeId)
-                print("taskDiscriptionTextView text",self.taskDiscriptionTextView.string)
-                self.dismiss(self)
-                k.showAllert(title: "Update Task", message: "Task updated Successfully")
+            viewModel.updateTask(id: safeId, description: taskDiscriptionTextView.string) { completion in
+                if completion == "SUCCESS"{
+                    DispatchQueue.main.async {
+                        self.dismiss(self)
+                    }
+                    k.showAllert(title: "Update Task", message: "Task updated Successfully")
+                }else{
+                    DispatchQueue.main.async {
+                        self.dismiss(self)
+                        
+                    }
+                }
+                
             }
         }
         

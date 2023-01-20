@@ -13,7 +13,6 @@ struct k{
         let alert = NSAlert()
         alert.messageText = title
         alert.informativeText = message
-        
         return alert.runModal() == NSApplication.ModalResponse.OK
     }
     
