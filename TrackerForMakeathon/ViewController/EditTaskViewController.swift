@@ -19,6 +19,7 @@ class EditTaskViewController: NSViewController {
     
     
     var task:String?
+    var discription:String?
     var createdAt:String?
     var taskId:String?
     
@@ -26,6 +27,7 @@ class EditTaskViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         editTastTextField.stringValue = task ?? ""
+        taskDiscriptionTextView.string = discription ?? ""
         taskDetailsDocCollectionView.dataSource = self
         taskDetailsDocCollectionView.delegate = self
         

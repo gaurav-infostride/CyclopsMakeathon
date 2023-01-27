@@ -1008,6 +1008,7 @@
                                     <constraint firstAttribute="height" constant="60" id="9ih-wb-Mm3"/>
                                     <constraint firstItem="vBW-cI-aTF" firstAttribute="leading" secondItem="sMy-P0-RsC" secondAttribute="trailing" constant="10" id="DUI-Gv-731"/>
                                     <constraint firstAttribute="bottom" secondItem="cys-M4-oxh" secondAttribute="bottom" constant="5" id="EV3-5K-deS"/>
+                                    <constraint firstAttribute="width" constant="1210" id="Rqk-fQ-1h7"/>
                                     <constraint firstItem="cys-M4-oxh" firstAttribute="top" secondItem="yP0-Yc-WIf" secondAttribute="top" constant="5" id="Vlx-qC-4tw"/>
                                     <constraint firstAttribute="bottom" secondItem="vBW-cI-aTF" secondAttribute="bottom" constant="5" id="Zmd-xr-opX"/>
                                     <constraint firstItem="sMy-P0-RsC" firstAttribute="leading" secondItem="yP0-Yc-WIf" secondAttribute="leading" constant="20" id="mVF-uK-3d5"/>
@@ -1017,7 +1018,8 @@
                             <containerView translatesAutoresizingMaskIntoConstraints="NO" id="X6Y-Mk-cte">
                                 <rect key="frame" x="0.0" y="0.0" width="1210" height="700"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="700" id="HJs-ki-ueZ"/>
+                                    <constraint firstAttribute="width" constant="1210" id="8c6-6s-GZM"/>
+                                    <constraint firstAttribute="height" constant="700" id="HJs-ki-ueZ"/>
                                 </constraints>
                             </containerView>
                         </subviews>
@@ -2318,7 +2320,7 @@
                 </viewController>
                 <customObject id="NMa-6V-Wob" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1396" y="1847"/>
+            <point key="canvasLocation" x="1319" y="1826"/>
         </scene>
         <!--Edit Task-->
         <scene sceneID="83n-id-EJQ">

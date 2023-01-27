@@ -19,6 +19,7 @@ class DashboardViewController: NSViewController {
     //For add task
     var taskCreatedAt:String?
     var taskAtCell : String?
+    var discAtCell : String?
     var taskId : String?
     
     //DurationModel
@@ -240,10 +241,10 @@ class DashboardViewController: NSViewController {
     
     
     @IBAction func onAddTask(_ sender: Any) {
-//        guard isPunchedIn else   {
-//            print("Plese Punch In to proceed")
-//            return
-//        }
+        guard isPunchedIn else   {
+            print("Plese Punch In to proceed")
+            return
+        }
         guard addTaskTextField.stringValue != "" else {
             k.showAllert(title: "Add Task", message: "Enter task title to add")
             return
@@ -399,6 +400,8 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             if segue.identifier == k.Segue.editTaskSegue{
                 if let vc = segue.destinationController as? EditTaskViewController {
                     vc.task = taskAtCell
+                    vc.discription = discAtCell
+                    
                     vc.createdAt = taskCreatedAt
                     vc.taskId = taskId
                 }
@@ -424,7 +427,10 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.editBtnCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? StatusReportNSTableCell else { return nil }
                 self.taskAtCell = self.viewModel.getTaskModel?.data?.task?[row].title
+//                self.discAtCellv = self.viewModel.getTaskModel?.data?.task?[row].description
+                
                 self.taskId = self.viewModel.getTaskModel?.data?.task?[row].id
+                
                 if self.viewModel.getTaskModel?.data?.task?[row].submited  == true{
                     cellView.editBtn.isHidden = true
                     cellView.viewTaskDetailsBtn.isHidden = false
