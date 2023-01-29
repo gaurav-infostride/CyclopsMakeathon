@@ -15,7 +15,7 @@ class UserViewModel {
         return Singleton.instance
     }
     
-    
+    var isViewTask : Bool?
     var attendanceData : AttendanceModel?
     var addTaskModel : AddTaskModel2?
     var getTaskModel : GetTaskModel?
@@ -27,13 +27,15 @@ class UserViewModel {
     
     
     //Update task with parameters using bearer Token GET request
-    func updateTask(id:String, description:String, completion:@escaping(String)->Void){
+    func updateTask(id:String?, description:String?, completion:@escaping(String)->Void){
         guard let loginToken = loginData?.data?.token else{
             k.showAllert(title: "User Token", message: "User token not available")
             return
         }
+        guard let safeId = id, let safeDescription = description else {return}
+        
         //HTTP Request Parameters which will be sent in HTTP Request Body
-        let params = "id=\(String(describing: id))&description=\(String(describing: description))"; //"gourav@yopmail.com"   //"Gourav@1234"
+        let params = "id=\(safeId)&description=\(safeDescription)";
         print("params--->",params)
         
         let url = URL(string: k.Url.updateTaskUrl)
@@ -76,7 +78,7 @@ class UserViewModel {
                 }
             } else {
                 k.showAllert(title: "Data not found !", message: "Login data not found!")
-                print("Error fetching data: \(String(describing: error))")
+                print("Error fetching data: \(error)")
             }
             
             
@@ -93,6 +95,8 @@ class UserViewModel {
             return
         }
         
+        guard let safeTitle = taskTitle else { return }
+        
         //Prepare URL
         let url = URL(string: k.Url.addTaskUrl)
         guard let requestUrl = url else { fatalError() }
@@ -104,7 +108,7 @@ class UserViewModel {
         request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
         
         //Parameters which will be sent in HTTP Request Body
-        let params = "title=\(String(describing: taskTitle))";
+        let params = "title=\(safeTitle)";
         print("params--->",params)
         
         // Sending Parameters HTTP Request Body
@@ -169,6 +173,7 @@ class UserViewModel {
                     let data = try decoder.decode(GetTaskModel.self, from: data)
                     self.getTaskModel = data
                     if self.getTaskModel?.status == "SUCCESS" {
+                        print(self.getTaskModel)
                         print("GetTask SUCCESS--->",data)
                         completion()
                     }else{
@@ -253,7 +258,7 @@ class UserViewModel {
         
         // HTTP Request Parameters which will be sent in HTTP Request Body
         if let email = email, let password = password{
-            let params = "email=\(String(describing: email))&password=\(String(describing: password))"; //"gourav@yopmail.com"   //"Gourav@1234"
+            let params = "email=\(email)&password=\(password)"; //"gourav@yopmail.com"   //"Gourav@1234"
             print("params--->",params)
             
             // Set HTTP Request Body

@@ -50,33 +50,33 @@ class ViewController: NSViewController {
                 k.showAllert(title: "Invlid Password", message: "Pasword must be greater than five digits")
             return
         }
-        viewModel.userLogin(email: idTextField.stringValue, password: passwordTextField.stringValue) {
-            guard let user = self.viewModel.loginData?.data?.user else{
-                    k.showAllert(title: "Login Data", message: "Login data not found !")
-                return
-                
-            }
-            DispatchQueue.main.async {
-                guard self.idTextField.stringValue == user.email ?? "" else{
-                    print("IdTF",self.idTextField.stringValue)
-                    print("Id",user.email ?? "")
-                    return
-                }
-                guard self.passwordTextField.stringValue == user.password ?? "" else{
-                    print("PassTF",self.passwordTextField.stringValue)
-                    print("PASS",user.password ?? "")
-                    return
-                }
-            }
-
+//        viewModel.userLogin(email: idTextField.stringValue, password: passwordTextField.stringValue) {
+//            guard let user = self.viewModel.loginData?.data?.user else{
+//                    k.showAllert(title: "Login Data", message: "Login data not found !")
+//                return
+//
+//            }
+//            DispatchQueue.main.async {
+//                guard self.idTextField.stringValue == user.email ?? "" else{
+//                    print("IdTF",self.idTextField.stringValue)
+//                    print("Id",user.email ?? "")
+//                    return
+//                }
+//                guard self.passwordTextField.stringValue == user.password ?? "" else{
+//                    print("PassTF",self.passwordTextField.stringValue)
+//                    print("PASS",user.password ?? "")
+//                    return
+//                }
+//            }
+//
             DispatchQueue.main.async {
                 if let viewController = self.storyboard?.instantiateController(withIdentifier: k.ViewController.containerVC) as? ContainerViewController {
                     self.view.window?.contentViewController = viewController
                 }
             }
-            
-            
-        }
+//
+//
+//        }
         
     }
 }

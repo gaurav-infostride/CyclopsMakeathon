@@ -7,6 +7,8 @@
 
 import Cocoa
 import Foundation
+import EventKit
+import CoreGraphics
 class DashboardViewController: NSViewController {
     // Create Date Formatter
     let dateFormatter = DateFormatter()
@@ -19,7 +21,7 @@ class DashboardViewController: NSViewController {
     //For add task
     var taskCreatedAt:String?
     var taskAtCell : String?
-    var discAtCell : String?
+    var taskDescriptionAtCell : String?
     var taskId : String?
     
     //DurationModel
@@ -69,6 +71,14 @@ class DashboardViewController: NSViewController {
     //HolidayDayDataSource/Model
     var holidayDayArr = ["Saturday","Monday","Monday","Monday","Monday","Tuesday","Wednesday","Thursday","Friday"]
     
+    struct TaskDetails {
+        let date  = ["Jan 02, 2023","Jan 03, 2023","Jan 04, 2023","Jan 05, 2023","Jan 06, 2023","Jan 09, 2023","Jan 10, 2023","Jan 11, 2023","Jan 12, 2023","Jan 13, 2023","Jan 16, 2023","Jan 17, 2023","Jan 18, 2023","Jan 19, 2023","Jan 20, 2023","Jan 23, 2023","Jan 24, 2023","Jan 25, 2023","Jan 26, 2023","Jan 27, 2023"]
+        let punchInTime  = ["4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM","4:00 PM"]
+        let punchOutTime = ["1:00 AM","1:30 AM","1:40 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM","1:00 AM"]
+        let status = ["Approved","Approved","Approved","Approved","Approved","Approved","Approved","Approved","Approved","Approved","Approved","Approved","Approved","HalfDay","Pending"]
+    }
+    
+    
     
     //PunchInDataSource/Model
     var punchInTimeDataModel = PunchInTimeDataModel()
@@ -82,10 +92,7 @@ class DashboardViewController: NSViewController {
         }
     }
     
-    
 
-    
-    
     // Declare the timer as a property
     var timer: Timer?
     var breakTimer : Timer?
@@ -162,7 +169,7 @@ class DashboardViewController: NSViewController {
         meetingView.wantsLayer = true
         
         //Providing NSView background color
-        dashboardView.layer?.backgroundColor = NSColor.white.cgColor
+        dashboardView.layer?.backgroundColor = NSColor.systemTeal.cgColor
         infoView.layer?.backgroundColor = NSColor.white.cgColor
         taskView.layer?.backgroundColor = NSColor.white.cgColor
         trackerView.layer?.backgroundColor = NSColor.white.cgColor
@@ -206,7 +213,12 @@ class DashboardViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         //var red = CGColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-        getSubmitedTask()
+//        getSubmitedTask()
+//        getProfileData()
+
+    }
+    
+    func getProfileData(){
         viewModel.getProfileData {
             if let myUser = self.viewModel.profileModel?.data?.user{
                 DispatchQueue.main.async {
@@ -215,18 +227,18 @@ class DashboardViewController: NSViewController {
                     self.mobileNoLabel.stringValue = myUser.phone ?? ""
                     self.gmailLabel.stringValue = myUser.email ?? ""
                     self.designationLabel.stringValue = myUser.designation ?? ""
-//                    self.reportingManagerLabel.stringValue = "\(myUser.reportingManager?.firstName ?? "") \(myUser.reportingManager?.lastName ?? "")"
+    //                    self.reportingManagerLabel.stringValue = "\(myUser.reportingManager?.firstName ?? "") \(myUser.reportingManager?.lastName ?? "")"
                 }
             }
         }
     }
-    
+        
     func getSubmitedTask(){
         viewModel.getTask {
             DispatchQueue.main.async {
                 self.addTaskTableView.reloadData()
             }
-            
+
         }
     }
     
@@ -242,6 +254,7 @@ class DashboardViewController: NSViewController {
     
     @IBAction func onAddTask(_ sender: Any) {
         guard isPunchedIn else   {
+            k.showAllert(title: "Add Task", message: "Plese PunchIn to Add Task")
             print("Plese Punch In to proceed")
             return
         }
@@ -250,13 +263,14 @@ class DashboardViewController: NSViewController {
             return
         }
 //        taskCreatedAt = k.at(date: date)
-        viewModel.addTask(taskTitle: addTaskTextField.stringValue) {
-            k.showAllert(title: "Add Task", message: "Task add successfully")
-            self.getSubmitedTask()
-        }
+//        viewModel.addTask(taskTitle: addTaskTextField.stringValue) {
+//            k.showAllert(title: "Add Task", message: "Task add successfully")
+//            self.getSubmitedTask()
+//        }
         addTaskTextField.stringValue = ""
         
     }
+    
     
     
     // This function will be called every time the timer fires
@@ -267,14 +281,15 @@ class DashboardViewController: NSViewController {
         seconds = (count % 3600) % 60
         print("Work----->",hours, minutes, seconds)
         if !isBreak{
-            timerLabel.stringValue = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+            timerLabel.stringValue = String(format: "%02d:%02d", hours, minutes)
         }
-        
+        print("PressedMouseButtons",NSEvent.pressedMouseButtons)
+//        print(NSEvent.KE)
         if count == 28800 { //28800
             timer?.invalidate()
             let punchOutTime = PunchOutTimeData.init(punchOutAt: date)
             punchOutTimeDataModel.punchOutTimeArray.append(punchOutTime)
-            let durationStamp = String(format: "%02d:%02d:%02d", hours, minutes,seconds)
+            let durationStamp = String(format: "%02d:%02d", hours, minutes)
             print(durationStamp)
             let workDuration = DurationeData.init(duration: durationStamp )
             durationDataModel.durationArray.append(workDuration)
@@ -289,8 +304,6 @@ class DashboardViewController: NSViewController {
             restartBtn.isEnabled = false
         }
     }
-    
-    
     // This method will be called every time the timer fires
     @objc func updateBreakTimer() {
         breakCount += 1
@@ -299,8 +312,41 @@ class DashboardViewController: NSViewController {
         breakSeconds = (breakCount % 3600) % 60
         print("Break---->>",breakHours, breakMinutes, breakSeconds  )
         if isBreak{
-            timerLabel.stringValue = String(format: "%02d:%02d:%02d", breakHours, breakMinutes, breakSeconds)
+            timerLabel.stringValue = String(format: "%02d:%02d", breakHours, breakMinutes)
         }
+    }
+    
+    func startEventTracking(){
+        print(NSEvent.pressedMouseButtons)
+        let eventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.rightMouseDown.rawValue)
+
+        let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap, eventsOfInterest: CGEventMask(eventMask), callback:{ (proxy, type, event, refcon) -> Unmanaged<CGEvent>? in
+            
+            // code to handle keyboard and mouse events
+            return Unmanaged.passRetained(event)
+            
+        }, userInfo: nil)
+        let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
+        CGEvent.tapEnable(tap: eventTap!, enable: true)
+
+        // wait for 5 minutes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5 * 60) {
+            self.count = -300
+            self.breakCount = +300
+            self.breakTimer?.fire()
+            self.timer?.invalidate()
+        }
+
+        CFRunLoopRun()
+
+//        NSEvent *(^eventHandler)(NSEvent*) = ^(NSEvent *event) {
+//            // Handle the event here
+//            return event;
+//        };
+//        eventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSAnyEventMask handler:eventHandler];
+//        [NSTimer scheduledTimerWithTimeInterval:300.0 target:self selector:@selector(logout) userInfo:nil repeats:NO];
+        
     }
     
     @IBAction func onPunchIn(_ sender: Any) {
@@ -348,7 +394,7 @@ class DashboardViewController: NSViewController {
         timerLabel.textColor = breakBtn.bezelColor
         timerTypeLbl.textColor = breakBtn.bezelColor
         timerTypeLbl.stringValue = "Break"
-        let workDurationStamp = String(format: "%02d:%02d:%02d", hours, minutes,seconds)
+        let workDurationStamp = String(format: "%02d:%02d", hours, minutes)
         print(workDurationStamp)
         workDuration = workDurationStamp
         breakTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateBreakTimer), userInfo: nil, repeats: true)
@@ -365,7 +411,7 @@ class DashboardViewController: NSViewController {
         timerLabel.textColor = punchInBtn.bezelColor
         timerTypeLbl.textColor = punchInBtn.bezelColor
         timerTypeLbl.stringValue = ""//"Work"
-        let breakDurationStamp = String(format: "%02d:%02d:%02d", breakHours, breakMinutes,breakSeconds)
+        let breakDurationStamp = String(format: "%02d:%02d", breakHours, breakMinutes)
         print(breakDurationStamp)
         breakDuration = breakDurationStamp
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -399,8 +445,8 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
             if segue.identifier == k.Segue.editTaskSegue{
                 if let vc = segue.destinationController as? EditTaskViewController {
-                    vc.task = taskAtCell
-                    vc.discription = discAtCell
+                    vc.taskTitle = taskAtCell
+                    vc.discription = taskDescriptionAtCell
                     
                     vc.createdAt = taskCreatedAt
                     vc.taskId = taskId
@@ -426,11 +472,7 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             else if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.editBtnColumn ) {
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.editBtnCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? StatusReportNSTableCell else { return nil }
-                self.taskAtCell = self.viewModel.getTaskModel?.data?.task?[row].title
-//                self.discAtCellv = self.viewModel.getTaskModel?.data?.task?[row].description
-                
-                self.taskId = self.viewModel.getTaskModel?.data?.task?[row].id
-                
+                guard let safeTitle = self.viewModel.getTaskModel?.data?.task?[row].title, let safeDescription = self.viewModel.getTaskModel?.data?.task?[row].description, let safeId = self.viewModel.getTaskModel?.data?.task?[row].id else {return nil }
                 if self.viewModel.getTaskModel?.data?.task?[row].submited  == true{
                     cellView.editBtn.isHidden = true
                     cellView.viewTaskDetailsBtn.isHidden = false
@@ -438,13 +480,20 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
                     cellView.editBtn.isHidden = false
                     cellView.viewTaskDetailsBtn.isHidden = true
                 }
-                
-                cellView.callback = {
+                cellView.editTaskCallback = {
                     DispatchQueue.main.async {
+                        self.viewModel.isViewTask = false
+                        self.taskAtCell = safeTitle
+                        self.taskId = safeId
                         self.performSegue(withIdentifier: k.Segue.editTaskSegue, sender: self)
                     }
                 }
-                
+                cellView.viewTaskCallback = {
+                    self.viewModel.isViewTask = true
+                    self.taskAtCell = safeTitle
+                    self.taskDescriptionAtCell = safeDescription
+                    self.performSegue(withIdentifier: k.Segue.editTaskSegue, sender: self)
+                }
                 return cellView
             }
             return nil

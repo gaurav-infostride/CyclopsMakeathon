@@ -18,49 +18,32 @@ class ProfileViewController: NSViewController {
     }
     
     @IBAction func onNameBtn(_ sender: Any) {
+        k.showAllert(title: "Profile Details", message: "This feature is under development")
     }
     
     @IBAction func onInfostrideBtn(_ sender: Any) {
+        k.showAllert(title: "INFOSTRIDE", message: "This feature is under development")
     }
     
     @IBAction func onSettingsBtn(_ sender: Any) {
+        k.showAllert(title: "Settings", message: "This feature is under development")
     }
     
     
-//    func restartApplication () {
-//        let viewController = V()
-//        let navCtrl = UINavigationController(rootViewController: viewController)
-//
-//        guard
-//            let window = UIApplication.shared.keyWindow,
-//            let rootViewController = window.rootViewController
-//
-//        else {
-//            return
-//        }
-//
-//        navCtrl.view.frame = rootViewController.view.frame
-//        navCtrl.view.layoutIfNeeded()
-//
-//        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
-//            window.rootViewController = navCtrl
-//        })
-//    }
 
-    
     @IBAction func onLogoutBtn(_ sender: Any) {
-        print("hii")
+        print("Logout Tapped")
         if let signVC = self.storyboard?.instantiateController(withIdentifier: k.ViewController.signInVC) as? ViewController {
             self.view.window?.contentViewController = signVC
             if let container = self.storyboard?.instantiateController(withIdentifier: k.ViewController.containerVC) as? ContainerViewController {
-//                self.dismiss(container)
-                //                self.view.window?.contentViewController = container
+                NSApplication.shared.terminate(self)
+//                    let appDelegate = NSApplication.shared.delegate as! AppDelegate
+//                    appDelegate.restart()
+
             }
             
         }
         
     }
-    
-    
     
 }

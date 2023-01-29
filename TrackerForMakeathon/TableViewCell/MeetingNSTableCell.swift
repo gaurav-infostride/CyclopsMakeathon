@@ -22,6 +22,6 @@ class MeetingNSTableCell: NSTableCellView {
     
     
     @IBAction func onViewBtnActn(_ sender: Any) {
-        
+        k.showAllert(title: "Meeting Room Booking", message: "This feature is under development")
     }
 }

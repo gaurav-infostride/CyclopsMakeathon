@@ -39,6 +39,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
     }
+    
+    
+    
+    func restart() {
+        let mainStoryboard = NSStoryboard(name: k.Storyboard.main, bundle: nil)
+        let initialVC = mainStoryboard.instantiateInitialController()
+        NSApplication.shared.windows[0].contentViewController = initialVC as? NSViewController
+    }
+
 
     // MARK: - Core Data stack
 

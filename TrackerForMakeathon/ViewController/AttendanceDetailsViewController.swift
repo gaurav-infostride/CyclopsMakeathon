@@ -8,10 +8,12 @@
 import Cocoa
 
 class AttendanceDetailsViewController: NSViewController {
-
+    @IBOutlet weak var topView: NSView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        topView.wantsLayer = true
+        topView.layer?.backgroundColor = NSColor.systemTeal.cgColor
     }
     
 }

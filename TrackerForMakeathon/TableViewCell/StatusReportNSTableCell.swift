@@ -8,11 +8,13 @@
 import Cocoa
 
 class StatusReportNSTableCell: NSTableCellView {
-    var callback: (()->())?
     @IBOutlet weak var taskTextField: NSTextField!
     @IBOutlet weak var editBtn: NSButton!
     @IBOutlet weak var viewTaskDetailsBtn: NSButton!
     let viewModel = UserViewModel.shared.self
+
+    var editTaskCallback: (()->())?
+    var viewTaskCallback: (()->())?
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -24,12 +26,11 @@ class StatusReportNSTableCell: NSTableCellView {
     
     
     @IBAction func onViewBtn(_ sender: Any) {
-        k.showAllert(title: "View Task Details", message: "This Feature is under development")
+        viewTaskCallback?()
     }
     
     @IBAction func onEditBtn(_ sender: Any) {
-        print("Edit Pressec on cell")
-        callback?()
+        editTaskCallback?()
     }
     
 }
