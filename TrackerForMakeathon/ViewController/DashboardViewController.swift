@@ -92,7 +92,7 @@ class DashboardViewController: NSViewController {
         }
     }
     
-
+    
     // Declare the timer as a property
     var timer: Timer?
     var breakTimer : Timer?
@@ -131,6 +131,7 @@ class DashboardViewController: NSViewController {
     //Attendance Manager items
     @IBOutlet weak var trackerView: NSView!
     @IBOutlet weak var punchInBtn: NSButton!
+    @IBOutlet weak var punchOutBtn: NSButton!
     @IBOutlet weak var breakBtn: NSButton!
     @IBOutlet weak var restartBtn: NSButton!
     @IBOutlet weak var timerLabel: NSTextField!
@@ -153,7 +154,7 @@ class DashboardViewController: NSViewController {
     
     
     let viewModel = UserViewModel.shared.self
-//    var taskData = TaskData()
+    //    var taskData = TaskData()
     
     
     override func viewDidLoad() {
@@ -188,8 +189,8 @@ class DashboardViewController: NSViewController {
         restartBtn.wantsLayer = true
         
         //Hiding break and restart Button as to unhide it on conditions. Using same view for break restart and punchin Button.
-        breakBtn.isHidden = true
-        restartBtn.isHidden = true
+//        breakBtn.isHidden = true
+//        restartBtn.isHidden = true
         
         //Providing ImageView layer
         employeDetailsProfileImageView.wantsLayer = true
@@ -213,9 +214,10 @@ class DashboardViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         //var red = CGColor(red: 100.0/255.0, green: 130.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-//        getSubmitedTask()
-//        getProfileData()
-
+        getSubmitedTask()
+        getProfileData()
+        getPunchDetails()
+        
     }
     
     func getProfileData(){
@@ -227,18 +229,26 @@ class DashboardViewController: NSViewController {
                     self.mobileNoLabel.stringValue = myUser.phone ?? ""
                     self.gmailLabel.stringValue = myUser.email ?? ""
                     self.designationLabel.stringValue = myUser.designation ?? ""
-    //                    self.reportingManagerLabel.stringValue = "\(myUser.reportingManager?.firstName ?? "") \(myUser.reportingManager?.lastName ?? "")"
+                    //                    self.reportingManagerLabel.stringValue = "\(myUser.reportingManager?.firstName ?? "") \(myUser.reportingManager?.lastName ?? "")"
                 }
             }
         }
     }
-        
+    
+    func getPunchDetails(){
+        viewModel.getPunchDetails {
+            print("punchDetailsModel",self.viewModel.punchDetailsModel)
+            DispatchQueue.main.async {
+                self.timeIntervalNSTableView.reloadData()
+            }
+        }
+    }
     func getSubmitedTask(){
         viewModel.getTask {
             DispatchQueue.main.async {
                 self.addTaskTableView.reloadData()
             }
-
+            
         }
     }
     
@@ -262,11 +272,11 @@ class DashboardViewController: NSViewController {
             k.showAllert(title: "Add Task", message: "Enter task title to add")
             return
         }
-//        taskCreatedAt = k.at(date: date)
-//        viewModel.addTask(taskTitle: addTaskTextField.stringValue) {
-//            k.showAllert(title: "Add Task", message: "Task add successfully")
-//            self.getSubmitedTask()
-//        }
+        taskCreatedAt = k.at(date: date)
+        viewModel.addTask(taskTitle: addTaskTextField.stringValue) {
+            k.showAllert(title: "Add Task", message: "Task add successfully")
+            self.getSubmitedTask()
+        }
         addTaskTextField.stringValue = ""
         
     }
@@ -284,7 +294,7 @@ class DashboardViewController: NSViewController {
             timerLabel.stringValue = String(format: "%02d:%02d", hours, minutes)
         }
         print("PressedMouseButtons",NSEvent.pressedMouseButtons)
-//        print(NSEvent.KE)
+        //        print(NSEvent.KE)
         if count == 28800 { //28800
             timer?.invalidate()
             let punchOutTime = PunchOutTimeData.init(punchOutAt: date)
@@ -319,7 +329,7 @@ class DashboardViewController: NSViewController {
     func startEventTracking(){
         print(NSEvent.pressedMouseButtons)
         let eventMask = (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.leftMouseDown.rawValue) | (1 << CGEventType.rightMouseDown.rawValue)
-
+        
         let eventTap = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap, options: .defaultTap, eventsOfInterest: CGEventMask(eventMask), callback:{ (proxy, type, event, refcon) -> Unmanaged<CGEvent>? in
             
             // code to handle keyboard and mouse events
@@ -329,7 +339,7 @@ class DashboardViewController: NSViewController {
         let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0)
         CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
         CGEvent.tapEnable(tap: eventTap!, enable: true)
-
+        
         // wait for 5 minutes
         DispatchQueue.main.asyncAfter(deadline: .now() + 5 * 60) {
             self.count = -300
@@ -337,53 +347,69 @@ class DashboardViewController: NSViewController {
             self.breakTimer?.fire()
             self.timer?.invalidate()
         }
-
+        
         CFRunLoopRun()
-
-//        NSEvent *(^eventHandler)(NSEvent*) = ^(NSEvent *event) {
-//            // Handle the event here
-//            return event;
-//        };
-//        eventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSAnyEventMask handler:eventHandler];
-//        [NSTimer scheduledTimerWithTimeInterval:300.0 target:self selector:@selector(logout) userInfo:nil repeats:NO];
+        
+        //        NSEvent *(^eventHandler)(NSEvent*) = ^(NSEvent *event) {
+        //            // Handle the event here
+        //            return event;
+        //        };
+        //        eventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSAnyEventMask handler:eventHandler];
+        //        [NSTimer scheduledTimerWithTimeInterval:300.0 target:self selector:@selector(logout) userInfo:nil repeats:NO];
         
     }
     
     @IBAction func onPunchIn(_ sender: Any) {
-        isPunchedIn = true
-        punchInBtn.isHidden = true
-        punchInBtn.isEnabled = false
-        breakBtn.isHidden = false
-        timerTypeLbl.textColor = punchInBtn.bezelColor
-        timerTypeLbl.stringValue = ""//"Work"
-        isBreak = false
-        let punchInTime = PunchInTimeData.init(punchinAt: date)
-        punchInTimeDataModel.punchInTimeArray.append(punchInTime)
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        timer?.fire()
-        count = 0
-        breakCount = 0
-        self.timeIntervalNSTableView.reloadData()
+        viewModel.getPunchin {
+            print("PunchIn Success")
+            self.isPunchedIn = true
+            self.punchOutBtn.isHidden = false
+            self.punchInBtn.isHidden = true
+            
+            self.timerTypeLbl.textColor = self.punchInBtn.bezelColor
+            self.timerTypeLbl.stringValue = ""//"Work"
+            let punchInTime = PunchInTimeData.init(punchinAt: self.date)
+            print("PunchIn At", punchInTime)
+            
+            //self.punchInTimeDataModel.punchInTimeArray.append(punchInTime)
+            self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            self.timer?.fire()
+            self.count = 0
+            self.breakCount = 0
+            self.timeIntervalNSTableView.reloadData()
+        }
+        
     }
     
     
-    //    @IBAction func onPunchOut(_ sender: Any) {
-    //        isPunchedIn = false
-    //        punchInBtn.isEnabled = true
-    //        punchInBtn.isHidden = false
-    //        pauseBtn.isHidden = true
-    //        let punchOutTime = PunchOutTimeData.init(punchOutAt: date)
-    //        punchOutTimeDataModel.punchOutTimeArray.append(punchOutTime)
-    //
-    //        let durationStamp = String(format: "%02d:%02d:%02d", hours, minutes,seconds)
-    //        print(durationStamp)
-    //        let duration = DurationeData.init(duration: durationStamp )
-    //        durationDataModel.durationArray.append(duration)
-    ////        timer?.invalidate()
-    //        self.timeIntervalNSTableView.reloadData()
-    //
-    //
-    //    }
+    @IBAction func onPunchOut(_ sender: Any) {
+
+        viewModel.punchOut(punchInId: viewModel.punchInModel?.data?.data?.id, duration: self.workDuration) {
+            print("PunchOut Success")
+            self.punchInBtn.isHidden = false
+            self.punchOutBtn.isHidden = true
+            self.isPunchedIn = false
+            
+            self.timer?.invalidate()
+            self.breakTimer?.invalidate()
+            
+            let punchOutTime = PunchOutTimeData.init(punchOutAt: self.date)
+            print("PunchOut At", punchOutTime)
+            
+            
+//            self.punchOutTimeDataModel.punchOutTimeArray.append(punchOutTime)
+            
+//            let durationStamp = String(format: "%02d:%02d", hours, minutes)
+//            print(durationStamp)
+//            let duration = DurationeData.init(duration: durationStamp )
+//            self.durationDataModel.durationArray.append(duration)
+//            timer?.invalidate()
+            self.timeIntervalNSTableView.reloadData()
+        }
+        
+        
+        
+    }
     
     
     @IBAction func onBreak(_ sender: Any) {
@@ -429,7 +455,7 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
         if tableView == addTaskTableView {
             return self.viewModel.getTaskModel?.data?.task?.count ?? 0
         } else if tableView == timeIntervalNSTableView {
-            return punchInTimeDataModel.punchInTimeArray.count
+            return self.viewModel.punchDetailsModel?.data?.data?.count ?? 0
         }else if tableView == holidayNSTableView {
             print(holidayNameArr.count)
             return holidayNameArr.count
@@ -443,16 +469,16 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
     
     //Preparing Segue
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-            if segue.identifier == k.Segue.editTaskSegue{
-                if let vc = segue.destinationController as? EditTaskViewController {
-                    vc.taskTitle = taskAtCell
-                    vc.discription = taskDescriptionAtCell
-                    
-                    vc.createdAt = taskCreatedAt
-                    vc.taskId = taskId
-                }
+        if segue.identifier == k.Segue.editTaskSegue{
+            if let vc = segue.destinationController as? EditTaskViewController {
+                vc.taskTitle = taskAtCell
+                vc.discription = taskDescriptionAtCell
+                
+                vc.createdAt = taskCreatedAt
+                vc.taskId = taskId
             }
         }
+    }
     
     //NSTableViewDelegate method. Creating table cell view for table columns
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -505,23 +531,30 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.dateColumn ) {
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.dateCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? TimeIntervalNSTableCell else { return nil }
-                if let  punchInDate = punchInTimeDataModel.punchInTimeArray[row].punchinAt{
-                    dateFormatter.dateFormat = "MMM dd, yyyy"
-                    dateFormatter.string(from: punchInDate)
-                    cellView.dateLabel.stringValue = dateFormatter.string(from: punchInDate)
+                print("punchInDate",viewModel.punchDetailsModel?.data?.data?[row].punchInDate)
+                if let  punchInDate = viewModel.punchDetailsModel?.data?.data?[row].punchInDate{
+                    dateFormatter.date(from: punchInDate)
+                    cellView.dateLabel.stringValue = punchInDate
+                    //punchInTimeDataModel.punchInTimeArray[row].punchinAt{
+                    //                    dateFormatter.dateFormat = "MMM dd, yyyy"
+                    //                    dateFormatter.string(from: punchInDate)
+                    //                    cellView.dateLabel.stringValue = dateFormatter.string(from: punchInDate)
                 }
                 return cellView
             }
+            
             
             //Creating table cell view for TimeInterval TableView punchInTimeColumn
             else if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.punchInTimeColumn) {
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.punchInTimeCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? TimeIntervalNSTableCell else { return nil }
-                if let  punchInTime = punchInTimeDataModel.punchInTimeArray[row].punchinAt{
-                    print(punchInTime)
-                    dateFormatter.dateFormat = "hh:mm"
-                    dateFormatter.string(from: punchInTime)
-                    cellView.punchInTimeLabel.stringValue = dateFormatter.string(from: punchInTime)
+                if let  punchInTime = viewModel.punchDetailsModel?.data?.data?[row].startTime{
+                    cellView.punchInTimeLabel.stringValue = punchInTime
+                    //punchInTimeDataModel.punchInTimeArray[row].punchinAt{
+                    //                    print(punchInTime)
+                    //                    dateFormatter.dateFormat = "hh:mm"
+                    //                    dateFormatter.string(from: punchInTime)
+                    //                    cellView.punchInTimeLabel.stringValue = dateFormatter.string(from: punchInTime)
                 }
                 return cellView
             }
@@ -530,16 +563,21 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             else if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.workDurationColumn){
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.workDurationCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? TimeIntervalNSTableCell else { return nil }
-                cellView.punchOutTimeLabel.stringValue = workDuration ?? ""
-                    return cellView
+                if let  workDuration = viewModel.punchDetailsModel?.data?.data?[row].workingHours{
+                    cellView.punchOutTimeLabel.stringValue = workDuration
+                }
+                return cellView
             }
             
             //Creating table cell view for TimeInterval TableView breakDurationColumn
             else if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.breakDurationColumn){
                 let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.breakDurationCell)
                 guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? TimeIntervalNSTableCell else { return nil }
-                cellView.durationLabel.stringValue =  breakDuration ?? ""
-                    return cellView
+                if let  breakDuration = viewModel.punchDetailsModel?.data?.data?[row].workingHours{
+                    cellView.durationLabel.stringValue =  ""//breakDuration
+                }
+                
+                return cellView
             }
             
             //Creating table cell view for TimeInterval TableView punchOutTimeColumn
@@ -604,7 +642,7 @@ extension DashboardViewController : NSTableViewDataSource, NSTableViewDelegate {
             
         }
         
-
+        
         //Creating table cell view for Meeting TableView meetingRoomColumn
         else if tableView == meetingNSTableView {
             if tableColumn?.identifier == NSUserInterfaceItemIdentifier(rawValue: k.TableViewItem.meetingRoomColumn ) {

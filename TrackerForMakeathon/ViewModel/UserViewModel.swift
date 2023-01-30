@@ -20,10 +20,160 @@ class UserViewModel {
     var addTaskModel : AddTaskModel2?
     var getTaskModel : GetTaskModel?
     var updateTask : UpdateTaskModel?
+    var punchInModel : PunchInModel?
     
     
     var loginData : LoginModel?
     var profileModel : ProfileModel?
+    var punchDetailsModel : PunchDetailsModel?
+    var punchOutModel : PunchOutModel?
+    
+    //Get Punch Details using bearer Token GET request
+    func getPunchDetails(completion:@escaping()->Void){
+        guard let loginToken = loginData?.data?.token else{
+            k.showAllert(title: "User Token", message: "User token not available")
+            return
+        }
+        
+        //Prepare URL
+        let url = URL(string: k.Url.punchDetailsUrl)
+        guard let requestUrl = url else { fatalError() }
+        
+        
+        //Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
+       
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let data = try decoder.decode(PunchDetailsModel.self, from: data)
+                    
+                    if data.status == "SUCCESS" {
+                        self.punchDetailsModel = data
+                        print(self.punchDetailsModel)
+//                        print("Punch Details SUCCESS--->",data)
+                        completion()
+                    }else if data.status == "FAIL"{
+                        k.showAllert(title: "Punch Details Data !", message: data.error?.message ?? "Failed to get Punch Details Data")
+                    }
+                } catch {
+                    k.showAllert(title: "Punch Details Data !", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            }
+            
+            
+        }
+        task.resume()
+        
+    }
+    
+    //Update Punchin using bearer Token GET request
+    func getPunchin(completion:@escaping()->Void){
+        guard let loginToken = loginData?.data?.token else{
+            k.showAllert(title: "User Token", message: "User token not available")
+            return
+        }
+        
+        //Prepare URL
+        let url = URL(string: k.Url.punchInUrl)
+        guard let requestUrl = url else { fatalError() }
+        
+        
+        //Prepare URL Request Object
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
+       
+        // Perform HTTP Request
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                return
+            }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                do {
+                    let data = try decoder.decode(PunchInModel.self, from: data)
+                    if data.status == "SUCCESS" {
+                        self.punchInModel = data
+                        print(self.punchInModel)
+                        print("Get PunchIn Data SUCCESS--->",self.punchInModel)
+                        completion()
+                    }else if data.status == "FAIL"{
+                        print(data)
+                        k.showAllert(title: "PunchIn Data", message: data.error?.message ?? "PunchIn Failed !")
+                    }
+                } catch {
+                    k.showAllert(title: "PunchIn Data", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            }
+            
+            
+        }
+        task.resume()
+        
+    }
+    
+    //Update PunchOut using bearer Token GET request
+    func punchOut(punchInId:String?,duration:String?,completion:@escaping()->Void){
+        guard let loginToken = loginData?.data?.token else{
+            k.showAllert(title: "User Token", message: "User token not available")
+            return
+        }
+        guard let safePunchInId = punchInId, let safeDuration = duration else {return}
+        
+        //HTTP Request Parameters which will be sent in HTTP Request Body
+        let params = "id=\(safePunchInId)&description=\(safeDuration)";
+        print("params--->",params)
+        
+        let url = URL(string: k.Url.punchOutUrl)
+        guard let requestUrl = url else { fatalError() }
+        //print("url ----> ",url)
+        
+        // Prepare URL Request Object //Set HTTP Request Body
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        request.setValue( "Bearer \(loginToken)", forHTTPHeaderField: "Authorization")
+        request.httpBody = params.data(using: String.Encoding.utf8)
+         
+        
+        // Perform HTTP Request
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard error == nil else { return }
+            
+            if let data = data {
+                let decoder = JSONDecoder()
+                
+                do {
+                    let data = try decoder.decode(PunchOutModel.self, from: data)
+                    self.punchOutModel = data
+                    if self.punchOutModel?.status == "SUCCESS" {
+                        completion()
+                    } else if self.punchOutModel?.status == "FAIL" {
+                        k.showAllert(title: self.updateTask?.status ?? "", message: self.updateTask?.error?.message ?? "")
+                    }else {
+                        k.showAllert(title: "PunchOut Data ", message: "Please check PunchIn id")
+                    }
+                    
+                } catch {
+                    k.showAllert(title: "Error !", message: error.localizedDescription)
+                    print("Error decoding model: \(error)")
+                }
+            }
+        }
+    }
+    
     
     
     //Update task with parameters using bearer Token GET request

@@ -23,7 +23,7 @@ struct k{
         }
     }
     
-    //function takes cdate and return string format
+    //function takes date and return string format
     static func at(date:Date) -> String{
         let dateFormatter = DateFormatter()
         let createdAt = date
@@ -31,6 +31,17 @@ struct k{
         dateFormatter.string(from: createdAt)
         return dateFormatter.string(from: createdAt)
     }
+    
+    //func takes date String and return date format
+    static func dateFromString(dateString:String)-> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: dateString)!
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//        let dateString = dateFormatter.string(from: date)
+        return date
+    }
+    
     
     static let appName = ""
     
@@ -43,6 +54,9 @@ struct k{
         static let addTaskUrl = "http://10.20.1.70:8000/task/addtask"
         static let getTaskUrl = "http://10.20.1.70:8000/task/gettask"
         static let updateTaskUrl = "http://10.20.1.70:8000/task/updatetask"
+        static let punchInUrl = "http://10.20.1.70:8000/punch/punchin"
+        static let punchDetailsUrl = "http://10.20.1.70:8000/punch/punchdetails"
+        static let punchOutUrl = "http://10.20.1.70:8000/punch/punchout"
     }
     
     struct ViewController{

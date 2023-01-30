@@ -38,12 +38,18 @@ class ContainerViewController: NSViewController, NSWindowDelegate {
         dashboardVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.dashboardVC) as? DashboardViewController
         taskVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.taskDetailsVC) as? TaskDetailsViewController
         attendanceVC = NSStoryboard(name: k.Storyboard.main, bundle: .main).instantiateController(withIdentifier: k.ViewController.attendanceDetailsVC) as? AttendanceDetailsViewController
+        self.view.window?.collectionBehavior = .fullScreenPrimary
+        print("container.bounds",container.bounds)
         
         
         //Add the dashboard view controller to the container.
         addChild(dashboardVC)
         container.addSubview(dashboardVC.view)
+        print("dashboardVC.view.frame",dashboardVC.view.frame)
         dashboardVC.view.frame = container.bounds
+        
+        
+        
         print("Container in viewdidload -=>", container)
     }
     
@@ -59,7 +65,10 @@ class ContainerViewController: NSViewController, NSWindowDelegate {
 
     }
     
-
+    func windowDidEnterFullScreen(_ notification: Notification) {
+       print("Window entered full screen")
+    }
+    
     @IBAction func onProfileBtn(_ sender: Any) {
         print("hii")
         performSegue(withIdentifier: k.Segue.editProfileSegue, sender: self)
@@ -118,6 +127,8 @@ class ContainerViewController: NSViewController, NSWindowDelegate {
 //        dashboardVC.view.frame = self.container.bounds
 //        self.container.addSubview(dashboardVC.view)
 //        view.addSubview(dashboardVC.view)
+
+
 //        let dashboardVC = DashboardViewController()
 //        addChild(dashboardVC)
 //        container.addSubview(dashboardVC.view)

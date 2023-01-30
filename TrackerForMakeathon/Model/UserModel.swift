@@ -9,7 +9,86 @@ import Foundation
 import AppKit
 
 
-import Foundation
+// MARK: - PunchOutModel
+struct PunchOutModel: Codable {
+    let data: PunchOutDetails?
+    let status, message: String?
+    let error : Error?
+}
+
+// MARK: - WelcomeData
+struct PunchOutDetails: Codable {
+    let data: PunchOutData?
+}
+
+// MARK: - DataData
+struct PunchOutData: Codable {
+    let id, user, startTime, endTime: String?
+    let workingHours, punchInDate, createdAt, updatedAt: String?
+    let v: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case user, startTime, endTime, workingHours, punchInDate, createdAt, updatedAt
+        case v = "__v"
+    }
+}
+
+
+// MARK: - PunchDetailsModel
+struct PunchDetailsModel: Codable {
+    let data: PunchDetails?
+    let status, message: String?
+    let error : Error?
+}
+
+// MARK: - DataClass
+struct PunchDetails: Codable {
+    let data: [PunchData]?
+}
+
+// MARK: - Datum
+struct  PunchData: Codable {
+    let id, user, startTime, endTime: String?
+    let workingHours, punchInDate, createdAt, updatedAt: String?
+    let v: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case user, startTime, endTime, workingHours, punchInDate, createdAt, updatedAt
+        case v = "__v"
+    }
+}
+
+
+
+// MARK: - PunchInModel
+struct PunchInModel: Codable {
+    let data: PunchInDetails?
+    let status, message: String?
+    let error : Error?
+}
+
+// MARK: - WelcomeData
+struct PunchInDetails: Codable {
+    let data: PunchInData?
+}
+
+// MARK: - DataData
+struct PunchInData: Codable {
+    let user, startTime, endTime, workingHours: String?
+    let id, punchInDate, createdAt, updatedAt: String?
+    let v: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case user, startTime, endTime, workingHours
+        case id = "_id"
+        case punchInDate, createdAt, updatedAt
+        case v = "__v"
+    }
+}
+
+
 
 // MARK: - UpdateTaskModel
 struct UpdateTaskModel: Codable {
