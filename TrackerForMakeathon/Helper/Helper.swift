@@ -5,7 +5,6 @@
 //  Created by Gaurav Kumar on 17/12/22.
 //
 
-import Foundation
 import AppKit
 struct k{
     
@@ -111,24 +110,18 @@ struct k{
         //Attendance Manager Table View
         static let dateColumn = "dateColumn"
         static let punchInTimeColumn = "punchInTimeColumn"
+        static let punchOutTimeColumn = "punchOutTimeColumn"
         static let workDurationColumn = "workDurationColumn"
-        static let breakDurationColumn = "breakDurationColumn"
-        static let punchOutTimeColumn = "breakDurationColumn"
-        static let durationColumn = "durationColumn"
-        
         
         static let dateCell = "dateCell"
         static let punchInTimeCell = "punchInTimeCell"
-        static let workDurationCell = "workDurationCell"
-        static let breakDurationCell = "breakDurationCell"
-        
         static let punchOutTimeCell = "punchOutTimeCell"
-        static let durationCell = "durationCell"
+        static let workDurationCell = "workDurationCell"
         
         static let dateField = "dateField"
         static let punchInTimeField = "punchInTimeField"
         static let punchOutTimeField = "punchOutTimeField"
-        static let durationField = "durationField"
+        static let workDurationField = "workDurationField"
     }
     
     

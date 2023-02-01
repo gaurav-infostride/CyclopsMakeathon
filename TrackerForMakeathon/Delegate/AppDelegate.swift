@@ -33,7 +33,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        let viewModel = UserViewModel.shared
+        let duration = ""
+        guard let safePunchId = viewModel.punchDetailsModel?.data?.data?.last?.id else {
+            print("PunchId nil")
+            return
+        }
+        guard let safeDuration = viewModel.workDuration else {
+           print("WorkDuration nill")
+            return
+        }
+        viewModel.punchOut(punchInId: safePunchId, duration: safeDuration){
+            print("User Punched Out")
+        }
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

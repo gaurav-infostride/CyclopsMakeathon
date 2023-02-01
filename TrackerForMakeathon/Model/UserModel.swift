@@ -184,7 +184,7 @@ struct User: Codable {
     let shiftTiming, profilePicture: String?
 //    let reportingManager: String?
 //    let reportingManager: ReportingManager?
-    
+    let isPunchedIn: Bool?
     let isManager: Bool?
     let status, dateOfJoining, createdAt, updatedAt: String?
     let v: Int?
@@ -194,7 +194,7 @@ struct User: Codable {
         case id = "_id"
         case email, password, firstName, lastName, phone, employeeCode, designation, department, location, shiftTiming, profilePicture, isManager, status, dateOfJoining, createdAt, updatedAt
         case v = "__v"
-        case managerName
+        case managerName, isPunchedIn
     }
 }
 // MARK: - ReportingManager

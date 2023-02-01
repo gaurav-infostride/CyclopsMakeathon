@@ -12,7 +12,7 @@ class TimeIntervalNSTableCell: NSTableCellView {
     @IBOutlet weak var dateLabel: NSTextField!
     @IBOutlet weak var punchInTimeLabel: NSTextField!
     @IBOutlet weak var punchOutTimeLabel: NSTextField!
-    @IBOutlet weak var durationLabel: NSTextField!
+    @IBOutlet weak var workDurationLabel: NSTextField!
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)

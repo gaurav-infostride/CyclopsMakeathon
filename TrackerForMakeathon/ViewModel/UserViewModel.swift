@@ -15,6 +15,9 @@ class UserViewModel {
         return Singleton.instance
     }
     
+    var workDuration : String?
+    var breakDuration : String?
+    
     var isViewTask : Bool?
     var attendanceData : AttendanceModel?
     var addTaskModel : AddTaskModel2?
@@ -77,7 +80,7 @@ class UserViewModel {
     }
     
     //Update Punchin using bearer Token GET request
-    func getPunchin(completion:@escaping()->Void){
+    func getPunchin(completion:@escaping(String)->Void){
         guard let loginToken = loginData?.data?.token else{
             k.showAllert(title: "User Token", message: "User token not available")
             return
@@ -105,12 +108,14 @@ class UserViewModel {
                     let data = try decoder.decode(PunchInModel.self, from: data)
                     if data.status == "SUCCESS" {
                         self.punchInModel = data
-                        print(self.punchInModel)
+                        print(self.punchInModel?.message)
                         print("Get PunchIn Data SUCCESS--->",self.punchInModel)
-                        completion()
+                        completion("SUCCESS")
                     }else if data.status == "FAIL"{
                         print(data)
-                        k.showAllert(title: "PunchIn Data", message: data.error?.message ?? "PunchIn Failed !")
+                        completion("FAIL")
+                        print(data.error?.message)
+//                        k.showAllert(title: "PunchIn Data", message: data.error?.message ?? "PunchIn Failed !")
                     }
                 } catch {
                     k.showAllert(title: "PunchIn Data", message: error.localizedDescription)
@@ -157,10 +162,11 @@ class UserViewModel {
                 
                 do {
                     let data = try decoder.decode(PunchOutModel.self, from: data)
-                    self.punchOutModel = data
-                    if self.punchOutModel?.status == "SUCCESS" {
+                    if data.status == "SUCCESS" {
+                        self.punchOutModel = data
+                        print("Punchout Success")
                         completion()
-                    } else if self.punchOutModel?.status == "FAIL" {
+                    } else if data.status == "FAIL" {
                         k.showAllert(title: self.updateTask?.status ?? "", message: self.updateTask?.error?.message ?? "")
                     }else {
                         k.showAllert(title: "PunchOut Data ", message: "Please check PunchIn id")
